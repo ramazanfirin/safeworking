@@ -1,0 +1,98 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myAlarmLabel" data-translate="safeworkingApp.alarm.home.createOrEditLabel">Create or edit a Alarm</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.alarm.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.alarm.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="safeworkingApp.alarm.insertDate" for="field_insertDate">Insert Date</label>
+                <div class="input-group">
+                    <input id="field_insertDate" type="text" class="form-control" name="insertDate" datetime-picker="{{dateformat}}" ng-model="vm.alarm.insertDate" is-open="vm.datePickerOpenStatus.insertDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('insertDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setImage($file, vm.alarm)" ngf-pattern="'image/*'">
+            <label class="control-label" data-translate="safeworkingApp.alarm.image" for="field_image">Image</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.alarm.imageContentType + ';base64,' + vm.alarm.image}}" style="max-height: 100px;" ng-if="vm.alarm.image" alt="alarm image"/>
+                <div ng-if="vm.alarm.image" class="help-block clearfix">
+                    <span class="pull-left">{{vm.alarm.imageContentType}}, {{vm.byteSize(vm.alarm.image)}}</span>
+                    <button type="button" ng-click="vm.alarm.image=null;vm.alarm.imageContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setImage($file, vm.alarm)" accept="image/*" data-translate="entity.action.addimage">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                    ng-model="vm.alarm.image"
+                    />
+            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                    ng-model="vm.alarm.imageContentType" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="safeworkingApp.alarm.alarmType" for="field_alarmType">Alarm Type</label>
+            <input type="text" class="form-control" name="alarmType" id="field_alarmType"
+                    ng-model="vm.alarm.alarmType"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="safeworkingApp.alarm.falseAlarm" for="field_falseAlarm">False Alarm</label>
+                <input type="checkbox" name="falseAlarm" id="field_falseAlarm"
+                          ng-model="vm.alarm.falseAlarm"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="safeworkingApp.alarm.processed" for="field_processed">Processed</label>
+                <input type="checkbox" name="processed" id="field_processed"
+                          ng-model="vm.alarm.processed"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="safeworkingApp.alarm.note" for="field_note">Note</label>
+            <input type="text" class="form-control" name="note" id="field_note"
+                    ng-model="vm.alarm.note"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="safeworkingApp.alarm.device" for="field_device">Device</label>
+            <select class="form-control" id="field_device" name="device" ng-model="vm.alarm.device" ng-options="device as device.id for device in vm.devices track by device.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="safeworkingApp.alarm.person" for="field_person">Person</label>
+            <select class="form-control" id="field_person" name="person" ng-model="vm.alarm.person" ng-options="person as person.id for person in vm.people track by person.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="safeworkingApp.alarm.camera" for="field_camera">Camera</label>
+            <select class="form-control" id="field_camera" name="camera" ng-model="vm.alarm.camera" ng-options="camera as camera.id for camera in vm.cameras track by camera.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

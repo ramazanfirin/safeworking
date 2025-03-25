@@ -1,0 +1,29 @@
+{
+    "safeworkingApp": {
+        "alarm" : {
+            "home": {
+                "title": "Alarms",
+                "createLabel": "Create a new Alarm",
+                "createOrEditLabel": "Create or edit a Alarm"
+            },
+            "created": "A new Alarm is created with identifier {{ param }}",
+            "updated": "A Alarm is updated with identifier {{ param }}",
+            "deleted": "A Alarm is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Alarm {{ id }}?"
+            },
+            "detail": {
+                "title": "Alarm"
+            },
+            "insertDate": "Insert Date",
+            "image": "Image",
+            "alarmType": "Alarm Type",
+            "falseAlarm": "False Alarm",
+            "processed": "Processed",
+            "note": "Note",
+            "device": "Device",
+            "person": "Person",
+            "camera": "Camera"
+        }
+    }
+}

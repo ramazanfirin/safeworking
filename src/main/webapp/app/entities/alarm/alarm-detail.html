@@ -1,0 +1,60 @@
+
+<div>
+    <h2><span data-translate="safeworkingApp.alarm.detail.title">Alarm</span> {{vm.alarm.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="safeworkingApp.alarm.insertDate">Insert Date</span></dt>
+        <dd>
+            <span>{{vm.alarm.insertDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="safeworkingApp.alarm.image">Image</span></dt>
+        <dd>
+            <div ng-if="vm.alarm.image">
+                <a ng-click="vm.openFile(vm.alarm.imageContentType, vm.alarm.image)">
+                    <img data-ng-src="{{'data:' + vm.alarm.imageContentType + ';base64,' + vm.alarm.image}}" style="max-width: 100%;" alt="alarm image"/>
+                </a>
+                {{vm.alarm.imageContentType}}, {{vm.byteSize(vm.alarm.image)}}
+            </div>
+        </dd>
+        <dt><span data-translate="safeworkingApp.alarm.alarmType">Alarm Type</span></dt>
+        <dd>
+            <span>{{vm.alarm.alarmType}}</span>
+        </dd>
+        <dt><span data-translate="safeworkingApp.alarm.falseAlarm">False Alarm</span></dt>
+        <dd>
+            <span>{{vm.alarm.falseAlarm}}</span>
+        </dd>
+        <dt><span data-translate="safeworkingApp.alarm.processed">Processed</span></dt>
+        <dd>
+            <span>{{vm.alarm.processed}}</span>
+        </dd>
+        <dt><span data-translate="safeworkingApp.alarm.note">Note</span></dt>
+        <dd>
+            <span>{{vm.alarm.note}}</span>
+        </dd>
+        <dt><span data-translate="safeworkingApp.alarm.device">Device</span></dt>
+        <dd>
+            <a ui-sref="device-detail({id:vm.alarm.device.id})">{{vm.alarm.device.id}}</a>
+        </dd>
+        <dt><span data-translate="safeworkingApp.alarm.person">Person</span></dt>
+        <dd>
+            <a ui-sref="person-detail({id:vm.alarm.person.id})">{{vm.alarm.person.id}}</a>
+        </dd>
+        <dt><span data-translate="safeworkingApp.alarm.camera">Camera</span></dt>
+        <dd>
+            <a ui-sref="camera-detail({id:vm.alarm.camera.id})">{{vm.alarm.camera.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="alarm-detail.edit({id:vm.alarm.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -32,9 +32,9 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/safeworking?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/safeworking?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Turkey&allowPublicKeyRetrieval=True&allowPublicKeyRetrieval=true
         username: root
-        password:
+        password: ra5699mo
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -82,7 +82,7 @@ liquibase:
 #        key-alias: safeworking
 # ===================================================================
 server:
-    port: 8080
+    port: 8085
 
 # ===================================================================
 # JHipster specific properties
@@ -146,3 +146,4 @@ jhipster:
 # ===================================================================
 
 application:
+    saveDirectoryPath: C:\Users\user\Documents\safeworkingrecordpath

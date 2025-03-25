@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span data-translate="safeworkingApp.camera.detail.title">Camera</span> {{vm.camera.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="safeworkingApp.camera.name">Name</span></dt>
+        <dd>
+            <span>{{vm.camera.name}}</span>
+        </dd>
+        <dt><span data-translate="safeworkingApp.camera.username">Username</span></dt>
+        <dd>
+            <span>{{vm.camera.username}}</span>
+        </dd>
+        <dt><span data-translate="safeworkingApp.camera.password">Password</span></dt>
+        <dd>
+            <span>{{vm.camera.password}}</span>
+        </dd>
+        <dt><span data-translate="safeworkingApp.camera.rtspUrl">Rtsp Url</span></dt>
+        <dd>
+            <span>{{vm.camera.rtspUrl}}</span>
+        </dd>
+        <dt><span data-translate="safeworkingApp.camera.channel">Channel</span></dt>
+        <dd>
+            <span>{{vm.camera.channel}}</span>
+        </dd>
+        <dt><span data-translate="safeworkingApp.camera.device">Device</span></dt>
+        <dd>
+            <a ui-sref="device-detail({id:vm.camera.device.id})">{{vm.camera.device.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="camera-detail.edit({id:vm.camera.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

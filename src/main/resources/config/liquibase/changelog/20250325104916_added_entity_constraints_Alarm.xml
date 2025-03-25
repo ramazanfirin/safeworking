@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Alarm.
+    -->
+    <changeSet id="20250325104916-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="device_id"
+                                 baseTableName="alarm"
+                                 constraintName="fk_alarm_device_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="device"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="alarm"
+                                 constraintName="fk_alarm_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="camera_id"
+                                 baseTableName="alarm"
+                                 constraintName="fk_alarm_camera_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="camera"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,16 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "serialNumber",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20250325104914",
+    "entityTableName": "device",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

@@ -199,6 +199,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.13</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
@@ -224,6 +225,7 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
+             <version>3.8.5</version>
         </dependency>
         <dependency>
             <groupId>net.logstash.logback</groupId>

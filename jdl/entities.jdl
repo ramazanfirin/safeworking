@@ -1,0 +1,39 @@
+entity Person{
+	name String required
+	surname String
+	nationalId String 
+}
+
+entity Device{
+	serialNumber String
+}
+
+entity Camera{
+	name String
+	username String
+	password String
+	rtspUrl String
+	channel Long
+}
+
+entity Alarm{
+	insertDate ZonedDateTime
+	image ImageBlob 
+	alarmType String
+	falseAlarm Boolean
+	processed Boolean
+	note String
+}   
+
+
+relationship ManyToOne {
+	Alarm{device} to Device
+	Alarm{person} to Person
+	Alarm{camera} to Camera
+	Camera{device} to Device
+}	
+	
+
+
+paginate Person,Device,Alarm with pagination
+

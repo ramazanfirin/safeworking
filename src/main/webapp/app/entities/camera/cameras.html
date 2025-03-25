@@ -1,0 +1,68 @@
+<div>
+    <h2 data-translate="safeworkingApp.camera.home.title">Cameras</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="camera.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="safeworkingApp.camera.home.createLabel">
+                        Create new Camera
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="safeworkingApp.camera.name">Name</span></th>
+                    <th><span data-translate="safeworkingApp.camera.username">Username</span></th>
+                    <th><span data-translate="safeworkingApp.camera.password">Password</span></th>
+                    <th><span data-translate="safeworkingApp.camera.rtspUrl">Rtsp Url</span></th>
+                    <th><span data-translate="safeworkingApp.camera.channel">Channel</span></th>
+                    <th><span data-translate="safeworkingApp.camera.device">Device</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="camera in vm.cameras track by camera.id">
+                    <td><a ui-sref="camera-detail({id:camera.id})">{{camera.id}}</a></td>
+                    <td>{{camera.name}}</td>
+                    <td>{{camera.username}}</td>
+                    <td>{{camera.password}}</td>
+                    <td>{{camera.rtspUrl}}</td>
+                    <td>{{camera.channel}}</td>
+                    <td>
+                        <a ui-sref="device-detail({id:camera.device.id})">{{camera.device.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="camera-detail({id:camera.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="camera.edit({id:camera.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="camera.delete({id:camera.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

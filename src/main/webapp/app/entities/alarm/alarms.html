@@ -1,0 +1,87 @@
+<div>
+    <h2 data-translate="safeworkingApp.alarm.home.title">Alarms</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="alarm.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="safeworkingApp.alarm.home.createLabel">
+                        Create new Alarm
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="insertDate"><span data-translate="safeworkingApp.alarm.insertDate">Insert Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="image"><span data-translate="safeworkingApp.alarm.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="alarmType"><span data-translate="safeworkingApp.alarm.alarmType">Alarm Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="falseAlarm"><span data-translate="safeworkingApp.alarm.falseAlarm">False Alarm</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="processed"><span data-translate="safeworkingApp.alarm.processed">Processed</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="note"><span data-translate="safeworkingApp.alarm.note">Note</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="device.id"><span data-translate="safeworkingApp.alarm.device">Device</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="person.id"><span data-translate="safeworkingApp.alarm.person">Person</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="camera.id"><span data-translate="safeworkingApp.alarm.camera">Camera</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="alarm in vm.alarms track by alarm.id">
+                    <td><a ui-sref="alarm-detail({id:alarm.id})">{{alarm.id}}</a></td>
+                    <td>{{alarm.insertDate | date:'medium'}}</td>
+                    <td>
+                        <a ng-if="alarm.image" ng-click="vm.openFile(alarm.imageContentType, alarm.image)">
+                            <img data-ng-src="{{'data:' + alarm.imageContentType + ';base64,' + alarm.image}}" style="max-height: 30px;" alt="alarm image"/>
+                        </a>
+                        <span ng-if="alarm.image">{{alarm.imageContentType}}, {{vm.byteSize(alarm.image)}}</span>
+                    </td>
+                    <td>{{alarm.alarmType}}</td>
+                    <td>{{alarm.falseAlarm}}</td>
+                    <td>{{alarm.processed}}</td>
+                    <td>{{alarm.note}}</td>
+                    <td>
+                        <a ui-sref="device-detail({id:alarm.device.id})">{{alarm.device.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="person-detail({id:alarm.person.id})">{{alarm.person.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="camera-detail({id:alarm.camera.id})">{{alarm.camera.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="alarm-detail({id:alarm.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="alarm.edit({id:alarm.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="alarm.delete({id:alarm.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

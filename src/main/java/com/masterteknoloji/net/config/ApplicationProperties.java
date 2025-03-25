@@ -10,5 +10,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
+	
+	private String saveDirectoryPath;
+
+	public String getSaveDirectoryPath() {
+		return saveDirectoryPath;
+	}
+
+	public void setSaveDirectoryPath(String saveDirectoryPath) {
+		this.saveDirectoryPath = saveDirectoryPath;
+	}
+	
+	
 
 }

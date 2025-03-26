@@ -17,6 +17,8 @@
             },
             "insertDate": "Insert Date",
             "image": "Image",
+            "backGroundImage": "Back Ground Image",
+            "imageFile": "Image File",
             "alarmType": "Alarm Type",
             "falseAlarm": "False Alarm",
             "processed": "Processed",

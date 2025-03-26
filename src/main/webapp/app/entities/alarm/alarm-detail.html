@@ -17,6 +17,19 @@
                 {{vm.alarm.imageContentType}}, {{vm.byteSize(vm.alarm.image)}}
             </div>
         </dd>
+        <dt><span data-translate="safeworkingApp.alarm.backGroundImage">Back Ground Image</span></dt>
+        <dd>
+            <div ng-if="vm.alarm.backGroundImage">
+                <a ng-click="vm.openFile(vm.alarm.backGroundImageContentType, vm.alarm.backGroundImage)">
+                    <img data-ng-src="{{'data:' + vm.alarm.backGroundImageContentType + ';base64,' + vm.alarm.backGroundImage}}" style="max-width: 100%;" alt="alarm image"/>
+                </a>
+                {{vm.alarm.backGroundImageContentType}}, {{vm.byteSize(vm.alarm.backGroundImage)}}
+            </div>
+        </dd>
+        <dt><span data-translate="safeworkingApp.alarm.imageFile">Image File</span></dt>
+        <dd>
+            <span>{{vm.alarm.imageFile}}</span>
+        </dd>
         <dt><span data-translate="safeworkingApp.alarm.alarmType">Alarm Type</span></dt>
         <dd>
             <span>{{vm.alarm.alarmType}}</span>

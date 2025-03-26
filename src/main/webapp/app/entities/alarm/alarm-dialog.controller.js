@@ -64,6 +64,20 @@
             }
         };
 
+        vm.setBackGroundImage = function ($file, alarm) {
+            if ($file && $file.$error === 'pattern') {
+                return;
+            }
+            if ($file) {
+                DataUtils.toBase64($file, function(base64Data) {
+                    $scope.$apply(function() {
+                        alarm.backGroundImage = base64Data;
+                        alarm.backGroundImageContentType = $file.type;
+                    });
+                });
+            }
+        };
+
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }

@@ -32,7 +32,7 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/safeworking?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Turkey&allowPublicKeyRetrieval=True&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://localhost:3306/safeworking3?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Turkey&allowPublicKeyRetrieval=True&allowPublicKeyRetrieval=true
         username: root
         password: ra5699mo
         hikari:
@@ -146,4 +146,4 @@ jhipster:
 # ===================================================================
 
 application:
-    saveDirectoryPath: C:\Users\user\Documents\safeworkingrecordpath
+    saveDirectoryPath: C:\Users\user\Documents\safeworkingrecordpath\

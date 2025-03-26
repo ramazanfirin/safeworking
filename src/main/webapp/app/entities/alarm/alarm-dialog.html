@@ -45,6 +45,34 @@
             <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
                     ng-model="vm.alarm.imageContentType" />
         </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setBackGroundImage($file, vm.alarm)" ngf-pattern="'image/*'">
+            <label class="control-label" data-translate="safeworkingApp.alarm.backGroundImage" for="field_backGroundImage">Back Ground Image</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.alarm.backGroundImageContentType + ';base64,' + vm.alarm.backGroundImage}}" style="max-height: 100px;" ng-if="vm.alarm.backGroundImage" alt="alarm image"/>
+                <div ng-if="vm.alarm.backGroundImage" class="help-block clearfix">
+                    <span class="pull-left">{{vm.alarm.backGroundImageContentType}}, {{vm.byteSize(vm.alarm.backGroundImage)}}</span>
+                    <button type="button" ng-click="vm.alarm.backGroundImage=null;vm.alarm.backGroundImageContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setBackGroundImage($file, vm.alarm)" accept="image/*" data-translate="entity.action.addimage">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="backGroundImage" id="field_backGroundImage"
+                    ng-model="vm.alarm.backGroundImage"
+                    />
+            <input type="hidden" class="form-control" name="backGroundImageContentType" id="field_backGroundImageContentType"
+                    ng-model="vm.alarm.backGroundImageContentType" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="safeworkingApp.alarm.imageFile" for="field_imageFile">Image File</label>
+            <input type="text" class="form-control" name="imageFile" id="field_imageFile"
+                    ng-model="vm.alarm.imageFile"
+                    />
+        </div>
         <div class="form-group">
             <label class="control-label" data-translate="safeworkingApp.alarm.alarmType" for="field_alarmType">Alarm Type</label>
             <input type="text" class="form-control" name="alarmType" id="field_alarmType"

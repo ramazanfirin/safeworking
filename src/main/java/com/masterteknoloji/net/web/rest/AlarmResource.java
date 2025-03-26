@@ -1,15 +1,14 @@
 package com.masterteknoloji.net.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.masterteknoloji.net.config.ApplicationProperties;
-import com.masterteknoloji.net.domain.Alarm;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import com.masterteknoloji.net.repository.AlarmRepository;
-import com.masterteknoloji.net.web.rest.errors.BadRequestAlertException;
-import com.masterteknoloji.net.web.rest.util.HeaderUtil;
-import com.masterteknoloji.net.web.rest.util.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
-import io.undertow.server.handlers.form.FormData;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,17 +17,30 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import com.codahale.metrics.annotation.Timed;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.masterteknoloji.net.domain.Alarm;
+import com.masterteknoloji.net.repository.AlarmRepository;
+import com.masterteknoloji.net.web.rest.errors.BadRequestAlertException;
+import com.masterteknoloji.net.web.rest.util.HeaderUtil;
+import com.masterteknoloji.net.web.rest.util.PaginationUtil;
+
+import io.github.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing Alarm.
@@ -42,12 +54,9 @@ public class AlarmResource {
     private static final String ENTITY_NAME = "alarm";
 
     private final AlarmRepository alarmRepository;
-    
-    private final ApplicationProperties applicationProperties;
 
-    public AlarmResource(AlarmRepository alarmRepository,ApplicationProperties applicationProperties) {
+    public AlarmResource(AlarmRepository alarmRepository) {
         this.alarmRepository = alarmRepository;
-        this.applicationProperties = applicationProperties;
     }
 
     /**
@@ -137,35 +146,69 @@ public class AlarmResource {
     
     @PostMapping("/alarms/createAlarm")
     public void handlePostRequest(
-            @RequestParam(value = "picture", required = false) MultipartFile file,
-            @RequestParam Map<String, String> allParams) {
+    		 @RequestParam Map<String, MultipartFile> files,
+            @RequestPart(value = "picture", required = false) List<MultipartFile> multipartfiles,  // Dosya
+            
+            @RequestParam Map<String, String> allParams,HttpServletRequest request
+            ) throws IOException {
     	
+    	
+    	 MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+    	 
+    	 
+    	  Alarm alarm = new Alarm();
+          alarm.setInsertDate(ZonedDateTime.now());
+          //alarm.setImageFile(targetFile.getAbsolutePath());
+          //alarm.setImage(file.getBytes());
+          //alarm.setAlarmType(getAlarmType(uploadDirectory))
+         
+          if(allParams.get("alarm_info") != null)
+        	  alarm.setAlarmType(getAlarmType(allParams.get("alarm_info")));
+    	 
+    	 
     	System.out.println("geldi");
     	
-    	if (file != null && !file.isEmpty()) {
-            String uploadDirectory = applicationProperties.getSaveDirectoryPath();
-            File targetFile = new File(uploadDirectory + file.getOriginalFilename());
-            
-            try {
-                file.transferTo(targetFile);
-                log.info("dosya kaydedildi");
-                
-                Alarm alarm = new Alarm();
-                alarm.setInsertDate(ZonedDateTime.now());
-                
-                alarmRepository.save(alarm);
-                
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.info("dosya kaydedilirken hata oluştu");
-               
-            }
-        } else {
-        	log.info("dosya gelmedi");
-        }
+    	if(multipartfiles.size()>0) {
+    		MultipartFile file = multipartfiles.get(0);
+    		alarm.setImage(file.getBytes());
+    		alarm.setImageContentType(file.getContentType());
+    	}
+    	
+    	if(multipartfiles.size()>1) {
+    		MultipartFile file = multipartfiles.get(1);
+    		alarm.setBackGroundImage(file.getBytes());
+    		alarm.setBackGroundImageContentType(file.getContentType());
+    	}    	
+    	 alarmRepository.save(alarm); 
+    	
     	
     	return;
     }
     
+    public String getAlarmType(String value) {
+    	String result ="";
+    	try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			JsonNode jsonObject = objectMapper.readTree(value);
+			
+			JsonNode additional = jsonObject.get("additional");
+			if(additional != null) {
+				JsonNode alarm_minor = additional.get("alarm_minor");
+				if(alarm_minor !=null)
+					return alarm_minor.asText();
+			}
+			
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return result;
+    }
+    
     //alarm_info={"additional":{"alarm_major":"alert_alarm","alarm_minor":"CALL","stream_id":1,"channel_type":3,"channel_id":0,"device_id":1,"monitor_id":102,"device_name":"testCamera","alarm_time":"1742901125592"},"global_info":{"message_type":"MSDP","version":"V2.3.3.B19_426","time_ms":"1742901125592","device_id":"M030201202210000148","data_uuid":"6504431:1742901125592"},"full_images":[{"original_resolution":{"width_pixels":1920,"height_pixels":1080},"image_data":{"image_data_format":1,"value":"1"}}],"warehouseV20Events":{"alarmEvents":[{"areaIds":[1],"eventType":"CALL","labels":{},"level":"ALARM_LEVEL","ruleId":1,"subType":"","targets":[{"areaId":1,"points":[{"x":0.44017016887664795,"y":0.071169525384902954},{"x":0.546575129032135,"y":0.55017679929733276}],"targetId":"PERSON:429:0","targetScore":0.97759515047073364,"targetType":"PERSON","trackId":"429"}],"areaTypes":["POLYGON"],"msdpCustom":{"imageData":{"format":"INDEX_FORMAT","value":"0"},"areaTypes":["POLYGON"],"trackId":"6504431"}}],"algoCabinName":"alert_alarm","version":"V2.0.0","uri":"2416825.jpg","frameId":2416825,"pts":1742901125592,"recvTs":1742901125592}}
+
 }

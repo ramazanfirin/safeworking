@@ -18,7 +18,9 @@ entity Camera{
 
 entity Alarm{
 	insertDate ZonedDateTime
-	image ImageBlob 
+	image ImageBlob
+	backGroundImage ImageBlob
+	imageFile String
 	alarmType String
 	falseAlarm Boolean
 	processed Boolean

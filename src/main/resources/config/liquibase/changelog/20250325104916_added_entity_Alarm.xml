@@ -33,6 +33,17 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="back_ground_image" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="back_ground_image_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="image_file" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="alarm_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

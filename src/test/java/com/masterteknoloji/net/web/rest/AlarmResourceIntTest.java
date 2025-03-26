@@ -52,6 +52,14 @@ public class AlarmResourceIntTest {
     private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
 
+    private static final byte[] DEFAULT_BACK_GROUND_IMAGE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_BACK_GROUND_IMAGE = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_BACK_GROUND_IMAGE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_BACK_GROUND_IMAGE_CONTENT_TYPE = "image/png";
+
+    private static final String DEFAULT_IMAGE_FILE = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_FILE = "BBBBBBBBBB";
+
     private static final String DEFAULT_ALARM_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_ALARM_TYPE = "BBBBBBBBBB";
 
@@ -105,6 +113,9 @@ public class AlarmResourceIntTest {
             .insertDate(DEFAULT_INSERT_DATE)
             .image(DEFAULT_IMAGE)
             .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
+            .backGroundImage(DEFAULT_BACK_GROUND_IMAGE)
+            .backGroundImageContentType(DEFAULT_BACK_GROUND_IMAGE_CONTENT_TYPE)
+            .imageFile(DEFAULT_IMAGE_FILE)
             .alarmType(DEFAULT_ALARM_TYPE)
             .falseAlarm(DEFAULT_FALSE_ALARM)
             .processed(DEFAULT_PROCESSED)
@@ -135,6 +146,9 @@ public class AlarmResourceIntTest {
         assertThat(testAlarm.getInsertDate()).isEqualTo(DEFAULT_INSERT_DATE);
         assertThat(testAlarm.getImage()).isEqualTo(DEFAULT_IMAGE);
         assertThat(testAlarm.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
+        assertThat(testAlarm.getBackGroundImage()).isEqualTo(DEFAULT_BACK_GROUND_IMAGE);
+        assertThat(testAlarm.getBackGroundImageContentType()).isEqualTo(DEFAULT_BACK_GROUND_IMAGE_CONTENT_TYPE);
+        assertThat(testAlarm.getImageFile()).isEqualTo(DEFAULT_IMAGE_FILE);
         assertThat(testAlarm.getAlarmType()).isEqualTo(DEFAULT_ALARM_TYPE);
         assertThat(testAlarm.isFalseAlarm()).isEqualTo(DEFAULT_FALSE_ALARM);
         assertThat(testAlarm.isProcessed()).isEqualTo(DEFAULT_PROCESSED);
@@ -174,6 +188,9 @@ public class AlarmResourceIntTest {
             .andExpect(jsonPath("$.[*].insertDate").value(hasItem(sameInstant(DEFAULT_INSERT_DATE))))
             .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
+            .andExpect(jsonPath("$.[*].backGroundImageContentType").value(hasItem(DEFAULT_BACK_GROUND_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].backGroundImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_BACK_GROUND_IMAGE))))
+            .andExpect(jsonPath("$.[*].imageFile").value(hasItem(DEFAULT_IMAGE_FILE.toString())))
             .andExpect(jsonPath("$.[*].alarmType").value(hasItem(DEFAULT_ALARM_TYPE.toString())))
             .andExpect(jsonPath("$.[*].falseAlarm").value(hasItem(DEFAULT_FALSE_ALARM.booleanValue())))
             .andExpect(jsonPath("$.[*].processed").value(hasItem(DEFAULT_PROCESSED.booleanValue())))
@@ -194,6 +211,9 @@ public class AlarmResourceIntTest {
             .andExpect(jsonPath("$.insertDate").value(sameInstant(DEFAULT_INSERT_DATE)))
             .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
             .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
+            .andExpect(jsonPath("$.backGroundImageContentType").value(DEFAULT_BACK_GROUND_IMAGE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.backGroundImage").value(Base64Utils.encodeToString(DEFAULT_BACK_GROUND_IMAGE)))
+            .andExpect(jsonPath("$.imageFile").value(DEFAULT_IMAGE_FILE.toString()))
             .andExpect(jsonPath("$.alarmType").value(DEFAULT_ALARM_TYPE.toString()))
             .andExpect(jsonPath("$.falseAlarm").value(DEFAULT_FALSE_ALARM.booleanValue()))
             .andExpect(jsonPath("$.processed").value(DEFAULT_PROCESSED.booleanValue()))
@@ -223,6 +243,9 @@ public class AlarmResourceIntTest {
             .insertDate(UPDATED_INSERT_DATE)
             .image(UPDATED_IMAGE)
             .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
+            .backGroundImage(UPDATED_BACK_GROUND_IMAGE)
+            .backGroundImageContentType(UPDATED_BACK_GROUND_IMAGE_CONTENT_TYPE)
+            .imageFile(UPDATED_IMAGE_FILE)
             .alarmType(UPDATED_ALARM_TYPE)
             .falseAlarm(UPDATED_FALSE_ALARM)
             .processed(UPDATED_PROCESSED)
@@ -240,6 +263,9 @@ public class AlarmResourceIntTest {
         assertThat(testAlarm.getInsertDate()).isEqualTo(UPDATED_INSERT_DATE);
         assertThat(testAlarm.getImage()).isEqualTo(UPDATED_IMAGE);
         assertThat(testAlarm.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
+        assertThat(testAlarm.getBackGroundImage()).isEqualTo(UPDATED_BACK_GROUND_IMAGE);
+        assertThat(testAlarm.getBackGroundImageContentType()).isEqualTo(UPDATED_BACK_GROUND_IMAGE_CONTENT_TYPE);
+        assertThat(testAlarm.getImageFile()).isEqualTo(UPDATED_IMAGE_FILE);
         assertThat(testAlarm.getAlarmType()).isEqualTo(UPDATED_ALARM_TYPE);
         assertThat(testAlarm.isFalseAlarm()).isEqualTo(UPDATED_FALSE_ALARM);
         assertThat(testAlarm.isProcessed()).isEqualTo(UPDATED_PROCESSED);

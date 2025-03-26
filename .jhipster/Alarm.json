@@ -31,6 +31,15 @@
             "fieldTypeBlobContent": "image"
         },
         {
+            "fieldName": "backGroundImage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "imageFile",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "alarmType",
             "fieldType": "String"
         },

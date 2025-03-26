@@ -33,6 +33,16 @@ public class Alarm implements Serializable {
     @Column(name = "image_content_type")
     private String imageContentType;
 
+    @Lob
+    @Column(name = "back_ground_image")
+    private byte[] backGroundImage;
+
+    @Column(name = "back_ground_image_content_type")
+    private String backGroundImageContentType;
+
+    @Column(name = "image_file")
+    private String imageFile;
+
     @Column(name = "alarm_type")
     private String alarmType;
 
@@ -100,6 +110,45 @@ public class Alarm implements Serializable {
 
     public void setImageContentType(String imageContentType) {
         this.imageContentType = imageContentType;
+    }
+
+    public byte[] getBackGroundImage() {
+        return backGroundImage;
+    }
+
+    public Alarm backGroundImage(byte[] backGroundImage) {
+        this.backGroundImage = backGroundImage;
+        return this;
+    }
+
+    public void setBackGroundImage(byte[] backGroundImage) {
+        this.backGroundImage = backGroundImage;
+    }
+
+    public String getBackGroundImageContentType() {
+        return backGroundImageContentType;
+    }
+
+    public Alarm backGroundImageContentType(String backGroundImageContentType) {
+        this.backGroundImageContentType = backGroundImageContentType;
+        return this;
+    }
+
+    public void setBackGroundImageContentType(String backGroundImageContentType) {
+        this.backGroundImageContentType = backGroundImageContentType;
+    }
+
+    public String getImageFile() {
+        return imageFile;
+    }
+
+    public Alarm imageFile(String imageFile) {
+        this.imageFile = imageFile;
+        return this;
+    }
+
+    public void setImageFile(String imageFile) {
+        this.imageFile = imageFile;
     }
 
     public String getAlarmType() {
@@ -221,6 +270,9 @@ public class Alarm implements Serializable {
             ", insertDate='" + getInsertDate() + "'" +
             ", image='" + getImage() + "'" +
             ", imageContentType='" + getImageContentType() + "'" +
+            ", backGroundImage='" + getBackGroundImage() + "'" +
+            ", backGroundImageContentType='" + getBackGroundImageContentType() + "'" +
+            ", imageFile='" + getImageFile() + "'" +
             ", alarmType='" + getAlarmType() + "'" +
             ", falseAlarm='" + isFalseAlarm() + "'" +
             ", processed='" + isProcessed() + "'" +

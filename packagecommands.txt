@@ -1,0 +1,6 @@
+
+mvnw verify -DskipTests
+copy target\safeworking-0.0.1-SNAPSHOT.war src\main\docker
+cd src\main\docker
+docker build -t ramazanfirin/safeworking:test_28032025 .
+docker push ramazanfirin/safeworking:test_28032025  

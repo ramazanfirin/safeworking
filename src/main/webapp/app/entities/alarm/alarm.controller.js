@@ -5,9 +5,9 @@
         .module('safeworkingApp')
         .controller('AlarmController', AlarmController);
 
-    AlarmController.$inject = ['$state', 'DataUtils', 'Alarm', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Person'];
+    AlarmController.$inject = ['$state', 'DataUtils', 'Alarm', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Person', '$uibModal'];
 
-    function AlarmController($state, DataUtils, Alarm, ParseLinks, AlertService, paginationConstants, pagingParams, Person) {
+    function AlarmController($state, DataUtils, Alarm, ParseLinks, AlertService, paginationConstants, pagingParams, Person, $uibModal) {
 
         var vm = this;
 
@@ -16,7 +16,7 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
-        vm.openFile = DataUtils.openFile;
+        vm.openFile = openFile;
         vm.byteSize = DataUtils.byteSize;
         vm.currentSearch = pagingParams.search;
         vm.search = search;
@@ -31,6 +31,43 @@
 
         loadAll();
         loadPersons();
+
+        function openFile(contentType, data) {
+            if (!data) {
+                AlertService.error('Resim verisi bulunamadı');
+                return;
+            }
+
+            // Eğer data zaten base64 formatında değilse, base64'e çevir
+            var base64Data = data;
+            if (!data.startsWith('data:')) {
+                base64Data = 'data:' + contentType + ';base64,' + data;
+            }
+
+            // Modal aç
+            $uibModal.open({
+                animation: true,
+                template: '<div class="modal-header"><h3 class="modal-title">Resim Görüntüle</h3><button type="button" class="close" ng-click="close()"><span>&times;</span></button></div><div class="modal-body" style="text-align:center;padding:0;"><div style="padding:2rem;"><img ng-src="' + base64Data + '" style="max-width:100%;max-height:80vh;" ng-load="adjustModalSize()"></div></div>',
+                controller: ['$scope', '$uibModalInstance', '$timeout', function($scope, $uibModalInstance, $timeout) {
+                    $scope.close = function() {
+                        $uibModalInstance.close();
+                    };
+                    
+                    $scope.adjustModalSize = function() {
+                        $timeout(function() {
+                            var modalBody = document.querySelector('.image-modal .modal-body');
+                            var img = modalBody.querySelector('img');
+                            if (img) {
+                                var modalDialog = document.querySelector('.image-modal .modal-dialog');
+                                modalDialog.style.width = (img.naturalWidth + 60) + 'px'; // 60px padding için
+                                modalDialog.style.maxWidth = '90vw'; // Maksimum genişlik sınırı
+                            }
+                        }, 100); // Resmin yüklenmesi için kısa bir bekleme
+                    };
+                }],
+                windowClass: 'image-modal'
+            });
+        }
 
         function loadPersons() {
             Person.query(function(result) {

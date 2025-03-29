@@ -21,7 +21,19 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'save': { method:'POST' },
+            'delete':{ method:'DELETE'},
+            'search': {
+                method: 'GET',
+                url: 'api/alarms/search',
+                isArray: true,
+                transformResponse: function (data) {
+                    data = angular.fromJson(data);
+                    data.insertDate = DateUtils.convertDateTimeFromServer(data.insertDate);
+                    return data;
+                }
+            }
         });
     }
 })();

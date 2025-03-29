@@ -211,4 +211,29 @@ public class AlarmResource {
     
     //alarm_info={"additional":{"alarm_major":"alert_alarm","alarm_minor":"CALL","stream_id":1,"channel_type":3,"channel_id":0,"device_id":1,"monitor_id":102,"device_name":"testCamera","alarm_time":"1742901125592"},"global_info":{"message_type":"MSDP","version":"V2.3.3.B19_426","time_ms":"1742901125592","device_id":"M030201202210000148","data_uuid":"6504431:1742901125592"},"full_images":[{"original_resolution":{"width_pixels":1920,"height_pixels":1080},"image_data":{"image_data_format":1,"value":"1"}}],"warehouseV20Events":{"alarmEvents":[{"areaIds":[1],"eventType":"CALL","labels":{},"level":"ALARM_LEVEL","ruleId":1,"subType":"","targets":[{"areaId":1,"points":[{"x":0.44017016887664795,"y":0.071169525384902954},{"x":0.546575129032135,"y":0.55017679929733276}],"targetId":"PERSON:429:0","targetScore":0.97759515047073364,"targetType":"PERSON","trackId":"429"}],"areaTypes":["POLYGON"],"msdpCustom":{"imageData":{"format":"INDEX_FORMAT","value":"0"},"areaTypes":["POLYGON"],"trackId":"6504431"}}],"algoCabinName":"alert_alarm","version":"V2.0.0","uri":"2416825.jpg","frameId":2416825,"pts":1742901125592,"recvTs":1742901125592}}
 
+    @GetMapping("/alarms/search")
+    @Timed
+    public ResponseEntity<List<Alarm>> searchAlarms(
+            @RequestParam(required = false) Long personId,
+            @RequestParam(required = false) String fromDate,
+            Pageable pageable) {
+        log.debug("REST request to search Alarms with personId: {} and fromDate: {}", personId, fromDate);
+        
+        Page<Alarm> page;
+        if (personId != null && fromDate != null) {
+            ZonedDateTime fromDateTime = ZonedDateTime.parse(fromDate);
+            page = alarmRepository.findByPersonIdAndInsertDateGreaterThanEqual(personId, fromDateTime, pageable);
+        } else if (personId != null) {
+            page = alarmRepository.findByPersonId(personId, pageable);
+        } else if (fromDate != null) {
+            ZonedDateTime fromDateTime = ZonedDateTime.parse(fromDate);
+            page = alarmRepository.findByInsertDateGreaterThanEqual(fromDateTime, pageable);
+        } else {
+            page = alarmRepository.findAll(pageable);
+        }
+        
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/alarms/search");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
 }

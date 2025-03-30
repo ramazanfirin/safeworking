@@ -19,7 +19,7 @@
                             <label class="control-label" for="field_alarmType">Alarm Tipi</label>
                             <select class="form-control" id="field_alarmType" name="alarmType" ng-model="vm.selectedAlarmType">
                                 <option value="">Tüm Tipler</option>
-                                <option ng-repeat="type in vm.alarmTypes" value="{{type.id}}">{{type.name}}</option>
+                                <option ng-repeat="type in vm.alarmTypes" value="{{type.id}}" data-translate="{{type.name}}">{{type.name}}</option>
                             </select>
                         </div>
                     </div>

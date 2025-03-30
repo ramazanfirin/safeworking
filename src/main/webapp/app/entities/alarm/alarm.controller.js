@@ -20,6 +20,10 @@
         vm.byteSize = DataUtils.byteSize;
         vm.currentSearch = pagingParams.search;
         vm.search = search;
+        vm.loadAll = loadAll;
+        vm.loadPersons = loadPersons;
+        vm.loadDevices = loadDevices;
+        vm.loadCameras = loadCameras;
         vm.selectedPersonId = null;
         vm.selectedDateFilter = null;
         vm.selectedDeviceId = null;
@@ -31,30 +35,34 @@
         vm.devices = [];
         vm.cameras = [];
         vm.alarmTypes = [
-            { id: '1', name: 'Giriş' },
-            { id: '2', name: 'Çıkış' },
-            { id: '3', name: 'Geçersiz' }
+            { id: "CALL", name: "safeworkingApp.AlarmType.CALL" },
+            { id: "WATCH_PHONE", name: "safeworkingApp.AlarmType.WATCH_PHONE" }
         ];
         vm.falseAlarmOptions = [
-            { id: 'true', name: 'Evet' },
-            { id: 'false', name: 'Hayır' }
+            { id: "true", name: "safeworkingApp.alarm.trueFalse.true" },
+            { id: "false", name: "safeworkingApp.alarm.trueFalse.false" }
         ];
         vm.processedOptions = [
-            { id: 'true', name: 'İşlendi' },
-            { id: 'false', name: 'İşlenmedi' }
+            { id: "true", name: "safeworkingApp.alarm.trueFalse.true" },
+            { id: "false", name: "safeworkingApp.alarm.trueFalse.false" }
         ];
         vm.dateFilters = [
-            { id: '1', name: 'Son 1 Gün' },
-            { id: '7', name: 'Son 1 Hafta' },
-            { id: '30', name: 'Son 1 Ay' },
-            { id: '365', name: 'Son 1 Yıl' },
-            { id: '36500', name: 'Hepsi' }
+            { id: "today", name: "Bugün" },
+            { id: "yesterday", name: "Dün" },
+            { id: "last7days", name: "Son 7 Gün" },
+            { id: "last30days", name: "Son 30 Gün" },
+            { id: "thisMonth", name: "Bu Ay" },
+            { id: "lastMonth", name: "Geçen Ay" }
         ];
 
-        loadAll();
-        loadPersons();
-        loadDevices();
-        loadCameras();
+        init();
+
+        function init() {
+            loadAll();
+            loadPersons();
+            loadDevices();
+            loadCameras();
+        }
 
         function openFile(contentType, data) {
             if (!data) {

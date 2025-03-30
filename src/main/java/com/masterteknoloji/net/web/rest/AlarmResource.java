@@ -242,7 +242,7 @@ public class AlarmResource {
         
         // Filtreleme işlemleri
         List<Alarm> filteredContent = page.getContent().stream()
-            .filter(alarm -> alarmType == null || alarm.getAlarmType().equals(alarmType))
+            .filter(alarm -> alarmType == null || alarm.getAlarmTypeValue().name().equals(alarmType))
             .filter(alarm -> falseAlarm == null || alarm.isFalseAlarm() == falseAlarm)
             .filter(alarm -> processed == null || alarm.isProcessed() == processed)
             .collect(Collectors.toList());

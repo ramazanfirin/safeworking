@@ -112,7 +112,8 @@
 <!--                         <span ng-if="alarm.backGroundImage">{{alarm.backGroundImageContentType}}, {{vm.byteSize(alarm.backGroundImage)}}</span> -->
                     </td>
 <!--                     <td>{{alarm.imageFile}}</td> -->
-                    <td>{{alarm.alarmType}}</td>
+<!--                     <td>{{alarm.alarmType}}</td> -->
+                    <td data-translate="{{'safeworkingApp.AlarmType.' + alarm.alarmTypeValue}}">{{alarm.alarmTypeValue}}</td>
 <!--                     <td>{{alarm.falseAlarm}}</td> -->
                     <td data-translate="{{'safeworkingApp.alarm.trueFalse.' + alarm.falseAlarm}}">{{alarm.falseAlarm}}</td>
                     <td>

@@ -20,6 +20,7 @@
             "backGroundImage": "Full Resim",
             "imageFile": "Resim Dosyası",
             "alarmType": "Alarm Tipi",
+            "alarmTypeValue": "Alarm Tipi",
             "falseAlarm": "Yanlış Alarm",
             "processed": "İşlem Yapıldı Mı?",
             "note": "Not",

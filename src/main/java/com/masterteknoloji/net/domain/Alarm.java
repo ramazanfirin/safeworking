@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+import com.masterteknoloji.net.domain.enumeration.AlarmType;
+
 /**
  * A Alarm.
  */
@@ -45,6 +47,10 @@ public class Alarm implements Serializable {
 
     @Column(name = "alarm_type")
     private String alarmType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "alarm_type_value")
+    private AlarmType alarmTypeValue;
 
     @Column(name = "false_alarm")
     private Boolean falseAlarm;
@@ -164,6 +170,19 @@ public class Alarm implements Serializable {
         this.alarmType = alarmType;
     }
 
+    public AlarmType getAlarmTypeValue() {
+        return alarmTypeValue;
+    }
+
+    public Alarm alarmTypeValue(AlarmType alarmTypeValue) {
+        this.alarmTypeValue = alarmTypeValue;
+        return this;
+    }
+
+    public void setAlarmTypeValue(AlarmType alarmTypeValue) {
+        this.alarmTypeValue = alarmTypeValue;
+    }
+
     public Boolean isFalseAlarm() {
         return falseAlarm;
     }
@@ -274,6 +293,7 @@ public class Alarm implements Serializable {
             ", backGroundImageContentType='" + getBackGroundImageContentType() + "'" +
             ", imageFile='" + getImageFile() + "'" +
             ", alarmType='" + getAlarmType() + "'" +
+            ", alarmTypeValue='" + getAlarmTypeValue() + "'" +
             ", falseAlarm='" + isFalseAlarm() + "'" +
             ", processed='" + isProcessed() + "'" +
             ", note='" + getNote() + "'" +

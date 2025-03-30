@@ -25,6 +25,9 @@ public class Device implements Serializable {
     @Column(name = "serial_number")
     private String serialNumber;
 
+    @Column(name = "description")
+    private String description;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -45,6 +48,19 @@ public class Device implements Serializable {
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Device description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -73,6 +89,7 @@ public class Device implements Serializable {
         return "Device{" +
             "id=" + getId() +
             ", serialNumber='" + getSerialNumber() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

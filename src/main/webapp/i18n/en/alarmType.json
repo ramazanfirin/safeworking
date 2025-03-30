@@ -1,0 +1,9 @@
+{
+    "safeworkingApp": {
+        "AlarmType" : {
+            "null": "",
+            "CALL": "CALL",
+            "WATCH_PHONE": "WATCH_PHONE"
+        }
+    }
+}

@@ -5,6 +5,10 @@
         {
             "fieldName": "serialNumber",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20250325104914",

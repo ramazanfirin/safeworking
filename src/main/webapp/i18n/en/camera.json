@@ -20,6 +20,7 @@
             "password": "Password",
             "rtspUrl": "Rtsp Url",
             "channel": "Channel",
+            "description": "Description",
             "device": "Device"
         }
     }

@@ -15,7 +15,8 @@
             "detail": {
                 "title": "Device"
             },
-            "serialNumber": "Serial Number"
+            "serialNumber": "Serial Number",
+            "description": "Description"
         }
     }
 }

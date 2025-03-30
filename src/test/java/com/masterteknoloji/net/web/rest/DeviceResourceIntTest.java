@@ -41,6 +41,9 @@ public class DeviceResourceIntTest {
     private static final String DEFAULT_SERIAL_NUMBER = "AAAAAAAAAA";
     private static final String UPDATED_SERIAL_NUMBER = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
     @Autowired
     private DeviceRepository deviceRepository;
 
@@ -79,7 +82,8 @@ public class DeviceResourceIntTest {
      */
     public static Device createEntity(EntityManager em) {
         Device device = new Device()
-            .serialNumber(DEFAULT_SERIAL_NUMBER);
+            .serialNumber(DEFAULT_SERIAL_NUMBER)
+            .description(DEFAULT_DESCRIPTION);
         return device;
     }
 
@@ -104,6 +108,7 @@ public class DeviceResourceIntTest {
         assertThat(deviceList).hasSize(databaseSizeBeforeCreate + 1);
         Device testDevice = deviceList.get(deviceList.size() - 1);
         assertThat(testDevice.getSerialNumber()).isEqualTo(DEFAULT_SERIAL_NUMBER);
+        assertThat(testDevice.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
     @Test
@@ -136,7 +141,8 @@ public class DeviceResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(device.getId().intValue())))
-            .andExpect(jsonPath("$.[*].serialNumber").value(hasItem(DEFAULT_SERIAL_NUMBER.toString())));
+            .andExpect(jsonPath("$.[*].serialNumber").value(hasItem(DEFAULT_SERIAL_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
     @Test
@@ -150,7 +156,8 @@ public class DeviceResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(device.getId().intValue()))
-            .andExpect(jsonPath("$.serialNumber").value(DEFAULT_SERIAL_NUMBER.toString()));
+            .andExpect(jsonPath("$.serialNumber").value(DEFAULT_SERIAL_NUMBER.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
     @Test
@@ -173,7 +180,8 @@ public class DeviceResourceIntTest {
         // Disconnect from session so that the updates on updatedDevice are not directly saved in db
         em.detach(updatedDevice);
         updatedDevice
-            .serialNumber(UPDATED_SERIAL_NUMBER);
+            .serialNumber(UPDATED_SERIAL_NUMBER)
+            .description(UPDATED_DESCRIPTION);
 
         restDeviceMockMvc.perform(put("/api/devices")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -185,6 +193,7 @@ public class DeviceResourceIntTest {
         assertThat(deviceList).hasSize(databaseSizeBeforeUpdate);
         Device testDevice = deviceList.get(deviceList.size() - 1);
         assertThat(testDevice.getSerialNumber()).isEqualTo(UPDATED_SERIAL_NUMBER);
+        assertThat(testDevice.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test

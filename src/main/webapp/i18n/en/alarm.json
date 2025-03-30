@@ -25,7 +25,13 @@
             "note": "Note",
             "device": "Device",
             "person": "Person",
-            "camera": "Camera"
+            "camera": "Camera",
+            
+            "trueFalse" : {
+	            "null": "",
+	            "true": "Yes",
+	            "false": "No"
+        	}
         }
     }
 }

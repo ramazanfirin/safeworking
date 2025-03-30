@@ -113,11 +113,13 @@
                     </td>
 <!--                     <td>{{alarm.imageFile}}</td> -->
                     <td>{{alarm.alarmType}}</td>
-                    <td>{{alarm.falseAlarm}}</td>
+<!--                     <td>{{alarm.falseAlarm}}</td> -->
+                    <td data-translate="{{'safeworkingApp.alarm.trueFalse.' + alarm.falseAlarm}}">{{alarm.falseAlarm}}</td>
                     <td>
                         <a ui-sref="person-detail({id:alarm.person.id})">{{alarm.person.name}} {{alarm.person.surname}}</a>
                     </td>
-                    <td>{{alarm.processed}}</td>
+<!--                     <td>{{alarm.processed}}</td> -->
+                    <td data-translate="{{'safeworkingApp.alarm.trueFalse.' + alarm.falseAlarm}}">{{alarm.processed}}</td>
 <!--                     <td>{{alarm.note}}</td> -->
                     <td>
                         <a ui-sref="device-detail({id:alarm.device.id})">{{alarm.device.id}}</a>

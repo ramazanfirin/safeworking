@@ -25,7 +25,13 @@
             "note": "Not",
             "device": "Aygıt",
             "person": "Kişi",
-            "camera": "Kamera"
+            "camera": "Kamera",
+            
+            "trueFalse" : {
+	            "null": "",
+	            "true": "Evet",
+	            "false": "hayır"
+        	}
         }
     }
 }

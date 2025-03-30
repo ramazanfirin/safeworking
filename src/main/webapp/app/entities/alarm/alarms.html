@@ -5,35 +5,72 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="row">
-                    <div class="col-xs-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <select class="form-control" ng-model="vm.selectedPersonId">
+                            <label class="control-label" for="field_person">Kişi Seçin</label>
+                            <select class="form-control" id="field_person" name="person" ng-model="vm.selectedPersonId">
                                 <option value="">Tüm Kişiler</option>
-                                <option ng-repeat="person in vm.persons" value="{{person.id}}">{{person.name}}</option>
+                                <option ng-repeat="person in vm.persons" value="{{person.id}}">{{person.name}} {{person.surname}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <select class="form-control" ng-model="vm.selectedDateFilter">
+                            <label class="control-label" for="field_alarmType">Alarm Tipi</label>
+                            <select class="form-control" id="field_alarmType" name="alarmType" ng-model="vm.selectedAlarmType">
+                                <option value="">Tüm Tipler</option>
+                                <option ng-repeat="type in vm.alarmTypes" value="{{type.id}}">{{type.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="field_falseAlarm">Yanlış Alarm</label>
+                            <select class="form-control" id="field_falseAlarm" name="falseAlarm" ng-model="vm.selectedFalseAlarm">
+                                <option value="">Tümü</option>
+                                <option ng-repeat="option in vm.falseAlarmOptions" value="{{option.id}}">{{option.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="field_processed">İşlem Durumu</label>
+                            <select class="form-control" id="field_processed" name="processed" ng-model="vm.selectedProcessed">
+                                <option value="">Tümü</option>
+                                <option ng-repeat="option in vm.processedOptions" value="{{option.id}}">{{option.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="field_dateFilter">Tarih Filtresi</label>
+                            <select class="form-control" id="field_dateFilter" name="dateFilter" ng-model="vm.selectedDateFilter">
                                 <option value="">Tüm Tarihler</option>
                                 <option ng-repeat="filter in vm.dateFilters" value="{{filter}}">{{filter.name}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-xs-2">
-                        <button class="btn btn-primary btn-block" ng-click="vm.search()">
-                            <span class="glyphicon glyphicon-search"></span> Ara
-                        </button>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">&nbsp;</label>
+                            <button class="btn btn-primary btn-block" ng-click="vm.search()">
+                                <span class="glyphicon glyphicon-search"></span>
+                                <span>Ara</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-xs-4">
-                        <button class="btn btn-primary" ui-sref="alarm.new" ng-hide="true">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            <span  data-translate="safeworkingApp.alarm.home.createLabel">
-                                Create new Alarm
-                            </span>
-                        </button>
-                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <button class="btn btn-primary" ui-sref="alarm.new" ng-hide="true">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span  data-translate="safeworkingApp.alarm.home.createLabel">
+                            Create new Alarm
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>

@@ -5,9 +5,9 @@
         .module('safeworkingApp')
         .controller('AlarmController', AlarmController);
 
-    AlarmController.$inject = ['$state', 'DataUtils', 'Alarm', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Person', '$uibModal'];
+    AlarmController.$inject = ['$state', 'DataUtils', 'Alarm', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Person', '$uibModal', 'Device', 'Camera'];
 
-    function AlarmController($state, DataUtils, Alarm, ParseLinks, AlertService, paginationConstants, pagingParams, Person, $uibModal) {
+    function AlarmController($state, DataUtils, Alarm, ParseLinks, AlertService, paginationConstants, pagingParams, Person, $uibModal, Device, Camera) {
 
         var vm = this;
 
@@ -22,15 +22,39 @@
         vm.search = search;
         vm.selectedPersonId = null;
         vm.selectedDateFilter = null;
+        vm.selectedDeviceId = null;
+        vm.selectedCameraId = null;
+        vm.selectedAlarmType = null;
+        vm.selectedFalseAlarm = null;
+        vm.selectedProcessed = null;
         vm.persons = [];
+        vm.devices = [];
+        vm.cameras = [];
+        vm.alarmTypes = [
+            { id: '1', name: 'Giriş' },
+            { id: '2', name: 'Çıkış' },
+            { id: '3', name: 'Geçersiz' }
+        ];
+        vm.falseAlarmOptions = [
+            { id: 'true', name: 'Evet' },
+            { id: 'false', name: 'Hayır' }
+        ];
+        vm.processedOptions = [
+            { id: 'true', name: 'İşlendi' },
+            { id: 'false', name: 'İşlenmedi' }
+        ];
         vm.dateFilters = [
             { id: '1', name: 'Son 1 Gün' },
             { id: '7', name: 'Son 1 Hafta' },
-            { id: '30', name: 'Son 1 Ay' }
+            { id: '30', name: 'Son 1 Ay' },
+            { id: '365', name: 'Son 1 Yıl' },
+            { id: '36500', name: 'Hepsi' }
         ];
 
         loadAll();
         loadPersons();
+        loadDevices();
+        loadCameras();
 
         function openFile(contentType, data) {
             if (!data) {
@@ -72,6 +96,18 @@
         function loadPersons() {
             Person.query(function(result) {
                 vm.persons = result;
+            });
+        }
+
+        function loadDevices() {
+            Device.query(function(result) {
+                vm.devices = result;
+            });
+        }
+
+        function loadCameras() {
+            Camera.query(function(result) {
+                vm.cameras = result;
             });
         }
 
@@ -128,38 +164,83 @@
         }
 
         function search() {
-            vm.page = 1;
-            
-            // Özel arama parametreleri
-            var searchParams = {
-                page: 0,
+            if (!vm.page) {
+                vm.page = 1;
+            }
+            var data = {
+                page: vm.page - 1,
                 size: vm.itemsPerPage,
-                sort: sort()
+                sort: vm.predicate + "," + (vm.reverse ? "asc" : "desc")
             };
 
-            // Kişi filtresi
             if (vm.selectedPersonId) {
-                searchParams.personId = vm.selectedPersonId;
+                data.personId = vm.selectedPersonId;
             }
-
-            // Tarih filtresi
+            if (vm.selectedAlarmType) {
+                data.alarmType = vm.selectedAlarmType;
+            }
+            if (vm.selectedFalseAlarm) {
+                data.falseAlarm = vm.selectedFalseAlarm === "true";
+            }
+            if (vm.selectedProcessed) {
+                data.processed = vm.selectedProcessed === "true";
+            }
             if (vm.selectedDateFilter) {
                 var today = new Date();
-                var filterDate = new Date();
-                filterDate.setDate(today.getDate() - parseInt(vm.selectedDateFilter.id));
-                searchParams.fromDate = filterDate.toISOString();
+                var startDate = new Date();
+                switch(vm.selectedDateFilter) {
+                    case "today":
+                        startDate.setHours(0, 0, 0, 0);
+                        data.startDate = startDate.toISOString();
+                        data.endDate = today.toISOString();
+                        break;
+                    case "yesterday":
+                        startDate.setDate(startDate.getDate() - 1);
+                        startDate.setHours(0, 0, 0, 0);
+                        data.startDate = startDate.toISOString();
+                        data.endDate = new Date(startDate.setHours(23, 59, 59, 999)).toISOString();
+                        break;
+                    case "last7days":
+                        startDate.setDate(startDate.getDate() - 7);
+                        data.startDate = startDate.toISOString();
+                        data.endDate = today.toISOString();
+                        break;
+                    case "last30days":
+                        startDate.setDate(startDate.getDate() - 30);
+                        data.startDate = startDate.toISOString();
+                        data.endDate = today.toISOString();
+                        break;
+                    case "thisMonth":
+                        startDate.setDate(1);
+                        startDate.setHours(0, 0, 0, 0);
+                        data.startDate = startDate.toISOString();
+                        data.endDate = today.toISOString();
+                        break;
+                    case "lastMonth":
+                        startDate.setMonth(startDate.getMonth() - 1);
+                        startDate.setDate(1);
+                        startDate.setHours(0, 0, 0, 0);
+                        data.startDate = startDate.toISOString();
+                        var lastDayOfMonth = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
+                        lastDayOfMonth.setHours(23, 59, 59, 999);
+                        data.endDate = lastDayOfMonth.toISOString();
+                        break;
+                }
             }
 
-            // Özel REST endpoint'i çağır
-            Alarm.search(searchParams, function(data, headers) {
+            function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
                 vm.alarms = data;
                 vm.page = 1;
-            }, function(error) {
+            }
+
+            function onError(error) {
                 AlertService.error(error.data.message);
-            });
+            }
+
+            Alarm.search(data, onSuccess, onError);
         }
     }
 })();

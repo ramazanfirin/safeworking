@@ -19,4 +19,8 @@ public interface AlarmRepository extends JpaRepository<Alarm, Long> {
     Page<Alarm> findByPersonId(Long personId, Pageable pageable);
     
     Page<Alarm> findByInsertDateGreaterThanEqual(ZonedDateTime insertDate, Pageable pageable);
+    
+    Page<Alarm> findByPersonIdAndInsertDateBetween(Long personId, ZonedDateTime startDate, ZonedDateTime endDate, Pageable pageable);
+    
+    Page<Alarm> findByInsertDateBetween(ZonedDateTime startDate, ZonedDateTime endDate, Pageable pageable);
 }

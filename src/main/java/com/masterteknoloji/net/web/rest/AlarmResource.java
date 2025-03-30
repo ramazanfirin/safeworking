@@ -7,6 +7,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -215,25 +216,39 @@ public class AlarmResource {
     @Timed
     public ResponseEntity<List<Alarm>> searchAlarms(
             @RequestParam(required = false) Long personId,
-            @RequestParam(required = false) String fromDate,
+            @RequestParam(required = false) String alarmType,
+            @RequestParam(required = false) Boolean falseAlarm,
+            @RequestParam(required = false) Boolean processed,
+            @RequestParam(required = false) String startDate,
+            @RequestParam(required = false) String endDate,
             Pageable pageable) {
-        log.debug("REST request to search Alarms with personId: {} and fromDate: {}", personId, fromDate);
+        log.debug("REST request to search Alarms with filters");
         
         Page<Alarm> page;
-        if (personId != null && fromDate != null) {
-            ZonedDateTime fromDateTime = ZonedDateTime.parse(fromDate);
-            page = alarmRepository.findByPersonIdAndInsertDateGreaterThanEqual(personId, fromDateTime, pageable);
+        if (startDate != null && endDate != null) {
+            ZonedDateTime startDateTime = ZonedDateTime.parse(startDate);
+            ZonedDateTime endDateTime = ZonedDateTime.parse(endDate);
+            
+            if (personId != null) {
+                page = alarmRepository.findByPersonIdAndInsertDateBetween(personId, startDateTime, endDateTime, pageable);
+            } else {
+                page = alarmRepository.findByInsertDateBetween(startDateTime, endDateTime, pageable);
+            }
         } else if (personId != null) {
             page = alarmRepository.findByPersonId(personId, pageable);
-        } else if (fromDate != null) {
-            ZonedDateTime fromDateTime = ZonedDateTime.parse(fromDate);
-            page = alarmRepository.findByInsertDateGreaterThanEqual(fromDateTime, pageable);
         } else {
             page = alarmRepository.findAll(pageable);
         }
         
+        // Filtreleme işlemleri
+        List<Alarm> filteredContent = page.getContent().stream()
+            .filter(alarm -> alarmType == null || alarm.getAlarmType().equals(alarmType))
+            .filter(alarm -> falseAlarm == null || alarm.isFalseAlarm() == falseAlarm)
+            .filter(alarm -> processed == null || alarm.isProcessed() == processed)
+            .collect(Collectors.toList());
+        
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/alarms/search");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(filteredContent, headers, HttpStatus.OK);
     }
 
 }

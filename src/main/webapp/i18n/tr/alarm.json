@@ -2,30 +2,30 @@
     "safeworkingApp": {
         "alarm" : {
             "home": {
-                "title": "Alarms",
-                "createLabel": "Create a new Alarm",
-                "createOrEditLabel": "Create or edit a Alarm"
+                "title": "Alarm Listesi",
+                "createLabel": "Yeni Alarm Oluştur",
+                "createOrEditLabel": "Oluştur veya Düzenle"
             },
-            "created": "A new Alarm is created with identifier {{ param }}",
-            "updated": "A Alarm is updated with identifier {{ param }}",
-            "deleted": "A Alarm is deleted with identifier {{ param }}",
+            "created": "Alarm Oluşturuldu. id: {{ param }}",
+            "updated": "Alarm Düzenlendi. id: {{ param }}",
+            "deleted": "Alarm Silindi. id: {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Alarm {{ id }}?"
+                "question": "Bu Alarmı Silmek İstiyor musunuz ? id: {{ id }}?"
             },
             "detail": {
                 "title": "Alarm"
             },
-            "insertDate": "Insert Date",
-            "image": "Image",
-            "backGroundImage": "Back Ground Image",
-            "imageFile": "Image File",
-            "alarmType": "Alarm Type",
-            "falseAlarm": "False Alarm",
-            "processed": "Processed",
-            "note": "Note",
-            "device": "Device",
-            "person": "Person",
-            "camera": "Camera"
+            "insertDate": "Tarih",
+            "image": "Resim",
+            "backGroundImage": "Full Resim",
+            "imageFile": "Resim Dosyası",
+            "alarmType": "Alarm Tipi",
+            "falseAlarm": "Yanlış Alarm",
+            "processed": "İşlem Yapıldı Mı?",
+            "note": "Not",
+            "device": "Aygıt",
+            "person": "Kişi",
+            "camera": "Kamera"
         }
     }
 }

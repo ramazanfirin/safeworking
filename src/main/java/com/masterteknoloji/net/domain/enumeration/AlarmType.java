@@ -6,3 +6,7 @@ package com.masterteknoloji.net.domain.enumeration;
 public enum AlarmType {
     CALL, WATCH_PHONE
 }
+
+
+
+		

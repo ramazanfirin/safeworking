@@ -1,11 +1,12 @@
 {
     "home": {
-        "title": "Merhaba, Java Hipster!",
-        "subtitle": "Burası Ana Sayfanız",
+        "title": "SafeWorking'e Hoş Geldiniz.",
+        "subtitle": "Yeni Nesil İş Güvenliği Sistemi",
+        "subtitle2": "Artık Çalışma Ortamlarımız Daha Güvenli",
         "logged": {
             "message": "\"{{username}}\" olarak giriş yaptınız."
         },
-        "question": "JHipster hakkında sorularınız için:",
+        "question": "SafeWorking hakkında sorularınız için:",
         "link": {
             "homepage": "JHipster ana sayfa",
             "stackoverflow": "Stack Overflow'da JHipster",

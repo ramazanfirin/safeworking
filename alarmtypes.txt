@@ -1,0 +1,97 @@
+Main alarm type: alert_alarm
+Alarm subtypes: 
+	LEAVE_POST, 
+	FIGHT, 
+	ELECTRIC_BIKE_IN_ELEVATOR, 
+	EXIT, 
+	PARK, 
+	RETROGRADE, //GERİLEME
+	PERSON_OVER_QUERYING, 
+	PERSON_LESS_QUERYING, 
+	GATHERING,  //TOPLANMA
+	SMOKING, 
+	RUN,
+	CALL, 
+	FALL, 
+	WATCH_PHONE, 
+	SLEEP, 
+	HOLDWEAPON，
+	COLLISION，
+	INTRUSION，//GİRİŞİM, IZINSIZ GİRİŞ
+	TRIPWIRE，//TEPKİ
+	OVERWALL，//DUVAR ÜSTÜ
+	CLIMB，
+	WANDER //DOLAŞMAK
+
+Primary alarm type: goods_alarm
+	Alarm subtypes: 
+		SUNDRY_DETECT, //ÇEŞİTLİ_ALGILA
+		GOODS_FORGET, 
+		GOODS_GUARD	
+		
+Primary alarm type: headcount_alarm
+	Alarm subtypes: 
+		MAX_NUMBER_PEOPLE, 
+		CROSS_LINE		
+		
+Primary alarm type: safety_alarm
+	Alarm subtypes: 
+		SAFETY_CAP, 
+		SAFETY_UNIFORM, 
+		SAFETY_BELT, 
+		REFLECTIVE_VEST, 
+		RESPIRATOR, //SOLUNUM CİHAZI
+		FIRE, 
+		SMOKE, 
+		OIL_SPILL, //PETROL_SIZINTISI
+		FIRE_EQUIPMENT	//YANGIN_EKİPMANLARI
+		
+Main alarm type: fire_alarm
+	Alarm subtypes: 
+		FIRE, 
+		SMOKE, 
+		FIRE_EQUIPMENT, 
+		EXPOSED_GARBAGE, //MARUZ
+		OVERFLOWED_GARBAGE//TAŞMIŞ_ÇÖP
+	
+Primary alarm type: gkpw_alarm
+	Alarm subtype: 
+		FALLING_GOODS
+		
+Primary alarm type: diagnosis_alarm
+	Alarm subtype: 
+		IMAGE_COVER_ALERT		
+		
+Primary alarm type: mclz_alarm
+	ALARM SUBTYPES: 
+		CHEF_CLOTH, 
+		CHEF_HAT, 
+		CHEF_RESPIRATOR, //ŞEF_SOLUNUM CİHAZI
+		RUBBER_GLOVE, //LASTİK_ELDİVEN
+		TRASHBIN, 
+		MICE
+		
+Primary alarm type: jyz_alarm //Gas station 
+	Alarm subtypes: 
+		FIRE, 
+		SMOKE, 
+		FIRE_EQUIPMENT, 
+		INDICATOR_FLAG, //GÖSTERGE_BAYRAĞI
+		OIL_PIPE, //PETROL_BORUSU
+		OIL_SPILL, //PETROL_SIZINTISI
+		OIL_GUN_DRAG, //YAĞ_SİLAH_SÜRÜKLEME
+		OILPUMP_DOOR_OPEN, //YAĞ POMPASI_KAPAĞI_AÇIK
+		OIL_TRUCK//YAĞ_KAMYONU
+		
+Main alarm type: city_alarm
+	ALARM SUBTYPES: 
+		EXPOSED_GARBAGE, 
+		HAWKER, //SEYYAR SATIŞÇISI
+		OUTSTORE, //DIŞ MAĞAZA
+		ROADSIDE, //YOL KENARI
+		SUNDRYSTACK, //ÇEŞİTLİ YİĞIN
+		MUCK, //ÇAMUR
+		OUTDOOR_ADV, //DIŞ MEKAN_REKLAM
+		WATERGATHER, //SU TOPLAMA
+		MUCK_TRUCK, //ÇAMUR_KAMYONU
+		OPENED_MUCKTRUCK //AÇIK_MUCKTRUCK

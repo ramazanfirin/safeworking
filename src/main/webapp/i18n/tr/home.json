@@ -15,6 +15,13 @@
             "follow": "Twitter'da @java_hipster adresinden ulaşabilirsiniz"
         },
         "like": "JHipster'ı beğendiysenizi yıldız vermeyi unutmayın",
-        "github": "GitHub"
+        "github": "GitHub",
+        
+               
+        "subDescTitle":"SafeWorking ile Artık Çalışma Alanlarımız Daha Güvenli",
+        "subDescItem1":"-Kamera Görüntü Analizi",
+        "subDescItem2":"-Gerçek Zamanlı Tespit",
+        "subDescItem3":"-Gelişmiş Yapay Zeka Tenolojisi",
+        "subDescItem4":"-Gelişmiş Entegrasyon Seçenekleri"   
     }
 }

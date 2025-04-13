@@ -2,8 +2,39 @@
     "safeworkingApp": {
         "AlarmType" : {
             "null": "",
+            "LEAVE_POST": "LEAVE_POST",
+            "FIGHT": "FIGHT",
+            "ELECTRIC_BIKE_IN_ELEVATOR": "ELECTRIC_BIKE_IN_ELEVATOR",
+            "EXIT": "EXIT",
+            "PARK": "PARK",
+            "RETROGRADE": "RETROGRADE",
+            "PERSON_OVER_QUERYING": "PERSON_OVER_QUERYING",
+            "PERSON_LESS_QUERYING": "PERSON_LESS_QUERYING",
+            "GATHERING": "GATHERING",
+            "SMOKING": "SMOKING",
+            "RUN": "RUN",
             "CALL": "CALL",
-            "WATCH_PHONE": "WATCH_PHONE"
+            "FALL": "FALL",
+            "WATCH_PHONE": "WATCH_PHONE",
+            "SLEEP": "SLEEP",
+            "HOLDWEAPON": "HOLDWEAPON",
+            "COLLISION": "COLLISION",
+            "INTRUSION": "INTRUSION",
+            "TRIPWIRE": "TRIPWIRE",
+            "OVERWALL": "OVERWALL",
+            "CLIMB": "CLIMB",
+            "WANDER": "WANDER",
+            "MAX_NUMBER_PEOPLE": "MAX_NUMBER_PEOPLE",
+            "CROSS_LINE": "CROSS_LINE",
+            "SAFETY_CAP": "SAFETY_CAP",
+            "SAFETY_UNIFORM": "SAFETY_UNIFORM",
+            "SAFETY_BELT": "SAFETY_BELT",
+            "REFLECTIVE_VEST": "REFLECTIVE_VEST",
+            "RESPIRATOR": "RESPIRATOR",
+            "FIRE": "FIRE",
+            "SMOKE": "SMOKE",
+            "OIL_SPILL": "OIL_SPILL",
+            "FIRE_EQUIPMENT": "FIRE_EQUIPMENT"
         }
     }
 }

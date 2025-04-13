@@ -64,8 +64,8 @@ public class AlarmResourceIntTest {
     private static final String DEFAULT_ALARM_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_ALARM_TYPE = "BBBBBBBBBB";
 
-    private static final AlarmType DEFAULT_ALARM_TYPE_VALUE = AlarmType.CALL;
-    private static final AlarmType UPDATED_ALARM_TYPE_VALUE = AlarmType.WATCH_PHONE;
+    private static final AlarmType DEFAULT_ALARM_TYPE_VALUE = AlarmType.LEAVE_POST;
+    private static final AlarmType UPDATED_ALARM_TYPE_VALUE = AlarmType.FIGHT;
 
     private static final Boolean DEFAULT_FALSE_ALARM = false;
     private static final Boolean UPDATED_FALSE_ALARM = true;

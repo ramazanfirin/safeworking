@@ -2,8 +2,39 @@
     "safeworkingApp": {
         "AlarmType" : {
             "null": "",
-            "CALL": "TELEFON_KONUSMA",
-            "WATCH_PHONE": "TELEFON_IZLEME"
+            "LEAVE_POST": "ALANDAN AYRILMA",
+            "FIGHT": "KAVGA",
+            "ELECTRIC_BIKE_IN_ELEVATOR": "ASANSORDE E-BİSİKLET",
+            "EXIT": "ARAÇ ÇIKIŞ",
+            "PARK": "ARAÇ PARK",
+            "RETROGRADE": "GERİLEME",
+            "PERSON_OVER_QUERYING": "KİŞİ SAYISI FAZLA",
+            "PERSON_LESS_QUERYING": "KİŞİ SAYISI AZ",
+            "GATHERING": "TOPLANMA",
+            "SMOKING": "SİGARA İÇME",
+            "RUN": "KOŞMA",
+            "CALL": "TELEFON GÖRÜŞMESİ",
+            "FALL": "DÜŞME",
+            "WATCH_PHONE": "TELEFON İZLEME",
+            "SLEEP": "UYUMA",
+            "HOLDWEAPON": "SİLAH TAŞIMA",
+            "COLLISION": "ÇARPIŞMA",
+            "INTRUSION": "IZINSIZ GİRİŞ",
+            "TRIPWIRE": "TEPKİ",
+            "OVERWALL": "DUVAR ÜSTÜ GEÇİŞ",
+            "CLIMB": "TIRMANMA",
+            "WANDER": "DOLAŞMAK",
+            "MAX_NUMBER_PEOPLE": "MAXİMUM KİŞİ SAYISI",
+            "CROSS_LINE": "ÇİZGİYİ GEÇME",
+            "SAFETY_CAP": "BARET İHLALİ",
+            "SAFETY_UNIFORM": "UNİFORMA İHLALİ",
+            "SAFETY_BELT": "EMNİYET KEMERİ İHTALİ",
+            "REFLECTIVE_VEST": "YANSITILI YELEK İHTAKİ",
+            "RESPIRATOR": "MASKE İHTALİ",
+            "FIRE": "ATEŞ",
+            "SMOKE": "DUMAN",
+            "OIL_SPILL": "OIL_SIZINTISI",
+            "FIRE_EQUIPMENT": "YANGIN EKİPMANI UYARISI"
         }
     }
 }

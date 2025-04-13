@@ -36,12 +36,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.masterteknoloji.net.domain.Alarm;
+import com.masterteknoloji.net.domain.Camera;
+import com.masterteknoloji.net.domain.Device;
+import com.masterteknoloji.net.domain.enumeration.AlarmType;
 import com.masterteknoloji.net.repository.AlarmRepository;
+import com.masterteknoloji.net.repository.CameraRepository;
+import com.masterteknoloji.net.repository.DeviceRepository;
 import com.masterteknoloji.net.web.rest.errors.BadRequestAlertException;
 import com.masterteknoloji.net.web.rest.util.HeaderUtil;
 import com.masterteknoloji.net.web.rest.util.PaginationUtil;
 
 import io.github.jhipster.web.util.ResponseUtil;
+import liquibase.pro.packaged.ca;
 
 /**
  * REST controller for managing Alarm.
@@ -55,9 +61,15 @@ public class AlarmResource {
     private static final String ENTITY_NAME = "alarm";
 
     private final AlarmRepository alarmRepository;
+    
+    private final DeviceRepository deviceRepository;
+    
+    private final CameraRepository cameraRepository;
 
-    public AlarmResource(AlarmRepository alarmRepository) {
+    public AlarmResource(AlarmRepository alarmRepository,DeviceRepository deviceRepository,CameraRepository cameraRepository) {
         this.alarmRepository = alarmRepository;
+        this.deviceRepository = deviceRepository;
+        this.cameraRepository = cameraRepository;
     }
 
     /**
@@ -163,9 +175,9 @@ public class AlarmResource {
           //alarm.setImage(file.getBytes());
           //alarm.setAlarmType(getAlarmType(uploadDirectory))
          
-          if(allParams.get("alarm_info") != null)
-        	  alarm.setAlarmType(getAlarmType(allParams.get("alarm_info")));
-    	 
+          if(allParams.get("alarm_info") != null) {
+        	  setParameters(alarm,allParams.get("alarm_info"));
+          }
     	 
     	System.out.println("geldi");
     	
@@ -186,30 +198,62 @@ public class AlarmResource {
     	return;
     }
     
-    public String getAlarmType(String value) {
-    	String result ="";
-    	try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			JsonNode jsonObject = objectMapper.readTree(value);
+    public void setParameters(Alarm alarm,String value) {
+    	ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			JsonNode alarmInfo = objectMapper.readTree(value);
+			JsonNode jsonObject = alarmInfo.get("additional");
+			if(jsonObject == null)
+				return;
 			
-			JsonNode additional = jsonObject.get("additional");
-			if(additional != null) {
-				JsonNode alarm_minor = additional.get("alarm_minor");
-				if(alarm_minor !=null)
-					return alarm_minor.asText();
+			
+			String alarmType = getJsonValue(jsonObject, "alarm_minor");
+			alarm.setAlarmType(alarmType);
+			AlarmType type = AlarmType.valueOf(alarmType);
+			alarm.setAlarmTypeValue(type);
+			
+			String deviceName = getJsonValue(jsonObject, "device_name");
+			alarm.setCamera(getCamera(deviceName));
+			
+			JsonNode globalInfo = alarmInfo.get("global_info");
+			if(globalInfo != null) {
+				String deviceId = getJsonValue(globalInfo, "device_id");
+				alarm.setDevice(getDevice(deviceId));
 			}
 			
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    	return result;
+		
     }
     
+    public String getJsonValue(JsonNode jsonObject,String parameter) {
+    	JsonNode node = jsonObject.get(parameter);
+    	if(node != null) {
+    		return node.asText();
+    	}
+    	return null;
+    }
+    
+    public Device getDevice(String deviceId) {
+    	Optional<Device> device = deviceRepository.findDeviceSerialNumber(deviceId);
+  		if(device.isPresent())
+  			return device.get();
+    	
+    	return null;
+    }
+    
+	public Camera getCamera(String cameraName) {
+
+		Optional<Camera> device = cameraRepository.findByCameraName(cameraName);
+		if (device.isPresent())
+			return device.get();
+
+		return null;
+	}
+    
+        
     //alarm_info={"additional":{"alarm_major":"alert_alarm","alarm_minor":"CALL","stream_id":1,"channel_type":3,"channel_id":0,"device_id":1,"monitor_id":102,"device_name":"testCamera","alarm_time":"1742901125592"},"global_info":{"message_type":"MSDP","version":"V2.3.3.B19_426","time_ms":"1742901125592","device_id":"M030201202210000148","data_uuid":"6504431:1742901125592"},"full_images":[{"original_resolution":{"width_pixels":1920,"height_pixels":1080},"image_data":{"image_data_format":1,"value":"1"}}],"warehouseV20Events":{"alarmEvents":[{"areaIds":[1],"eventType":"CALL","labels":{},"level":"ALARM_LEVEL","ruleId":1,"subType":"","targets":[{"areaId":1,"points":[{"x":0.44017016887664795,"y":0.071169525384902954},{"x":0.546575129032135,"y":0.55017679929733276}],"targetId":"PERSON:429:0","targetScore":0.97759515047073364,"targetType":"PERSON","trackId":"429"}],"areaTypes":["POLYGON"],"msdpCustom":{"imageData":{"format":"INDEX_FORMAT","value":"0"},"areaTypes":["POLYGON"],"trackId":"6504431"}}],"algoCabinName":"alert_alarm","version":"V2.0.0","uri":"2416825.jpg","frameId":2416825,"pts":1742901125592,"recvTs":1742901125592}}
 
     @GetMapping("/alarms/search")

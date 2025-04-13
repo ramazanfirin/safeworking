@@ -9,6 +9,12 @@
     <include file="config/liquibase/changelog/20250325104914_added_entity_Device.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250325104915_added_entity_Camera.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250325104916_added_entity_Alarm.xml" relativeToChangelogFile="false"/>
+    
+    <include file="config/liquibase/changelog/20250330104916_added_entity_Alarm.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250330104917_added_entity_Device.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250330104918_added_entity_Camera.xml" relativeToChangelogFile="false"/>
+    
+   
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20250325104915_added_entity_constraints_Camera.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250325104916_added_entity_constraints_Alarm.xml" relativeToChangelogFile="false"/>

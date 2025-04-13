@@ -6,6 +6,7 @@ entity Person{
 
 entity Device{
 	serialNumber String
+	description String
 }
 
 entity Camera{
@@ -14,6 +15,7 @@ entity Camera{
 	password String
 	rtspUrl String
 	channel Long
+	description String
 }
 
 entity Alarm{
@@ -22,10 +24,16 @@ entity Alarm{
 	backGroundImage ImageBlob
 	imageFile String
 	alarmType String
+	alarmTypeValue AlarmType
 	falseAlarm Boolean
 	processed Boolean
 	note String
 }   
+
+enum AlarmType{
+	CALL,
+	WATCH_PHONE
+}
 
 
 relationship ManyToOne {

@@ -28,6 +28,10 @@
         {
             "fieldName": "channel",
             "fieldType": "Long"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20250325104915",

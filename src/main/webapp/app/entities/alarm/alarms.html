@@ -3,13 +3,75 @@
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="alarm.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="safeworkingApp.alarm.home.createLabel">
-                        Create new Alarm
-                    </span>
-                </button>
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="field_person">Kişi Seçin</label>
+                            <select class="form-control" id="field_person" name="person" ng-model="vm.selectedPersonId">
+                                <option value="">Tüm Kişiler</option>
+                                <option ng-repeat="person in vm.persons" value="{{person.id}}">{{person.name}} {{person.surname}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="field_alarmType">Alarm Tipi</label>
+                            <select class="form-control" id="field_alarmType" name="alarmType" ng-model="vm.selectedAlarmType">
+                                <option value="">Tüm Tipler</option>
+                                <option ng-repeat="type in vm.alarmTypes" value="{{type.id}}" data-translate="{{type.name}}">{{type.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="field_falseAlarm">Yanlış Alarm</label>
+                            <select class="form-control" id="field_falseAlarm" name="falseAlarm" ng-model="vm.selectedFalseAlarm">
+                                <option value="">Tümü</option>
+                                <option ng-repeat="option in vm.falseAlarmOptions" value="{{option.id}}">{{option.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="field_processed">İşlem Durumu</label>
+                            <select class="form-control" id="field_processed" name="processed" ng-model="vm.selectedProcessed">
+                                <option value="">Tümü</option>
+                                <option ng-repeat="option in vm.processedOptions" value="{{option.id}}">{{option.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label" for="field_dateFilter">Tarih Filtresi</label>
+                            <select class="form-control" id="field_dateFilter" name="dateFilter" ng-model="vm.selectedDateFilter">
+                                <option value="">Tüm Tarihler</option>
+                                <option ng-repeat="filter in vm.dateFilters" value="{{filter}}">{{filter.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">&nbsp;</label>
+                            <button class="btn btn-primary btn-block" ng-click="vm.search()">
+                                <span class="glyphicon glyphicon-search"></span>
+                                <span>Ara</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <button class="btn btn-primary" ui-sref="alarm.new" ng-hide="true">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span  data-translate="safeworkingApp.alarm.home.createLabel">
+                            Create new Alarm
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -24,45 +86,49 @@
                     <th jh-sort-by="backGroundImage"><span data-translate="safeworkingApp.alarm.backGroundImage">Back Ground Image</span> <span class="glyphicon glyphicon-sort"></span></th>
 <!--                     <th jh-sort-by="imageFile"><span data-translate="safeworkingApp.alarm.imageFile">Image File</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                     <th jh-sort-by="alarmType"><span data-translate="safeworkingApp.alarm.alarmType">Alarm Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-<!--                     <th jh-sort-by="falseAlarm"><span data-translate="safeworkingApp.alarm.falseAlarm">False Alarm</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-<!--                     <th jh-sort-by="processed"><span data-translate="safeworkingApp.alarm.processed">Processed</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+                     <th jh-sort-by="falseAlarm"><span data-translate="safeworkingApp.alarm.falseAlarm">False Alarm</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="person.id"><span data-translate="safeworkingApp.alarm.person">Person</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="processed"><span data-translate="safeworkingApp.alarm.processed">Processed</span> <span class="glyphicon glyphicon-sort"></span></th>
 <!--                     <th jh-sort-by="note"><span data-translate="safeworkingApp.alarm.note">Note</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-<!--                     <th jh-sort-by="device.id"><span data-translate="safeworkingApp.alarm.device">Device</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-<!--                     <th jh-sort-by="person.id"><span data-translate="safeworkingApp.alarm.person">Person</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-<!--                     <th jh-sort-by="camera.id"><span data-translate="safeworkingApp.alarm.camera">Camera</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+                    <th jh-sort-by="device.id"><span data-translate="safeworkingApp.alarm.device">Device</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="camera.id"><span data-translate="safeworkingApp.alarm.camera">Camera</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="alarm in vm.alarms track by alarm.id">
                     <td><a ui-sref="alarm-detail({id:alarm.id})">{{alarm.id}}</a></td>
-                    <td>{{alarm.insertDate | date:'medium'}}</td>
+                    <td>{{alarm.insertDate | date:'dd.MM.yyyy HH:mm:ss'}}</td>
                     <td>
                         <a ng-if="alarm.image" ng-click="vm.openFile(alarm.imageContentType, alarm.image)">
-                            <img data-ng-src="{{'data:' + alarm.imageContentType + ';base64,' + alarm.image}}" style="max-height: 200px;" alt="alarm image"/>
+                            <img data-ng-src="{{'data:' + alarm.imageContentType + ';base64,' + alarm.image}}" style="max-height: 70px;" alt="alarm image"/>
                         </a>
 <!--                         <span ng-if="alarm.image">{{alarm.imageContentType}}, {{vm.byteSize(alarm.image)}}</span> -->
                     </td>
                     <td>
                         <a ng-if="alarm.backGroundImage" ng-click="vm.openFile(alarm.backGroundImageContentType, alarm.backGroundImage)">
-                            <img data-ng-src="{{'data:' + alarm.backGroundImageContentType + ';base64,' + alarm.backGroundImage}}" style="max-height: 200px;" alt="alarm image"/>
+                            <img data-ng-src="{{'data:' + alarm.backGroundImageContentType + ';base64,' + alarm.backGroundImage}}" style="max-height: 70px;" alt="alarm image"/>
                         </a>
 <!--                         <span ng-if="alarm.backGroundImage">{{alarm.backGroundImageContentType}}, {{vm.byteSize(alarm.backGroundImage)}}</span> -->
                     </td>
 <!--                     <td>{{alarm.imageFile}}</td> -->
-                    <td>{{alarm.alarmType}}</td>
+<!--                     <td>{{alarm.alarmType}}</td> -->
+                    <td data-translate="{{'safeworkingApp.AlarmType.' + alarm.alarmTypeValue}}">{{alarm.alarmTypeValue}}</td>
 <!--                     <td>{{alarm.falseAlarm}}</td> -->
+                    <td data-translate="{{'safeworkingApp.alarm.trueFalse.' + alarm.falseAlarm}}">{{alarm.falseAlarm}}</td>
+                    <td>
+                        <a ui-sref="person-detail({id:alarm.person.id})">{{alarm.person.name}} {{alarm.person.surname}}</a>
+                    </td>
 <!--                     <td>{{alarm.processed}}</td> -->
+                    <td data-translate="{{'safeworkingApp.alarm.trueFalse.' + alarm.falseAlarm}}">{{alarm.processed}}</td>
 <!--                     <td>{{alarm.note}}</td> -->
-<!--                     <td> -->
-<!--                         <a ui-sref="device-detail({id:alarm.device.id})">{{alarm.device.id}}</a> -->
-<!--                     </td> -->
-<!--                     <td> -->
-<!--                         <a ui-sref="person-detail({id:alarm.person.id})">{{alarm.person.id}}</a> -->
-<!--                     </td> -->
-<!--                     <td> -->
-<!--                         <a ui-sref="camera-detail({id:alarm.camera.id})">{{alarm.camera.id}}</a> -->
-<!--                     </td> -->
+                    <td>
+                        <a ui-sref="device-detail({id:alarm.device.id})">{{alarm.device.id}}</a>
+                    </td>
+                    
+                    <td>
+                        <a ui-sref="camera-detail({id:alarm.camera.id})">{{alarm.camera.id}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -94,3 +160,41 @@
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
 </div>
+
+<style>
+    .image-modal .modal-content {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        margin: 0 auto;
+    }
+    .image-modal .modal-header {
+        border-bottom: 1px solid #dee2e6;
+        padding: 1rem;
+    }
+    .image-modal .modal-body {
+        padding: 2rem 0;
+        overflow: hidden;
+    }
+    .image-modal .modal-title {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+    .image-modal .close {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        opacity: .5;
+        transition: opacity .15s linear;
+    }
+    .image-modal .close:hover {
+        color: #000;
+        text-decoration: none;
+        opacity: .75;
+    }
+    .image-modal .modal-dialog {
+        transition: width 0.3s ease-in-out;
+    }
+</style>

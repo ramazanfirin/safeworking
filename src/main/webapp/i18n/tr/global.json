@@ -7,9 +7,9 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Varlıklar",
-                "person": "Person",
-                "device": "Device",
-                "camera": "Camera",
+                "person": "Kişi",
+                "device": "Cihaz",
+                "camera": "Kamera",
                 "alarm": "Alarm",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
@@ -49,7 +49,7 @@
         },
         "messages": {
             "info": {
-                "authenticated": "<a class=\"alert-link\" href=\"\" ng-click=\"vm.login()\">Giriş</a> yapmak istiyorsanız, varsayılan hesaplardan birini deneyebilirsiniz:<br/>- Yönetici (kullanıcı adı=\"admin\" ve şifre=\"admin\") <br/>- Kullanıcı (kullanıcı adı=\"user\" and şifre=\"user\").",
+                "authenticated": "Giriş Yapmak için Hesap-><a class=\"alert-link\" href=\"\" ng-click=\"vm.login()\">Giriş</a> menüsünü kullanabilirsiniz.",
                 "register": "Henüz bir hesabınız yok mu? <a class=\"alert-link\" href=\"\" ng-click=\"vm.register()\">Yeni hesap oluştur</a>"
             },
             "error": {
@@ -125,5 +125,5 @@
         "emailexists": "E-posta adresi zaten kullanılıyor!",
         "idexists": "A new {{entityName}} cannot already have an ID"
     },
-    "footer": "Burası sayfa alt bilgisi"
+    "footer": "http://www.safeworking.ai"
 }

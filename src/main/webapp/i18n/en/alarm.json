@@ -20,12 +20,19 @@
             "backGroundImage": "Back Ground Image",
             "imageFile": "Image File",
             "alarmType": "Alarm Type",
+            "alarmTypeValue": "Alarm Type Value",
             "falseAlarm": "False Alarm",
             "processed": "Processed",
             "note": "Note",
             "device": "Device",
             "person": "Person",
-            "camera": "Camera"
+            "camera": "Camera",
+            
+            "trueFalse" : {
+	            "null": "",
+	            "true": "Yes",
+	            "false": "No"
+        	}
         }
     }
 }

@@ -125,6 +125,7 @@
                         entity: function () {
                             return {
                                 serialNumber: null,
+                                description: null,
                                 id: null
                             };
                         }

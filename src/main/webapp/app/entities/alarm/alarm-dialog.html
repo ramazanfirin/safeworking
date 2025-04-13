@@ -80,6 +80,13 @@
                     />
         </div>
         <div class="form-group">
+            <label class="control-label" data-translate="safeworkingApp.alarm.alarmTypeValue" for="field_alarmTypeValue">Alarm Type Value</label>
+            <select class="form-control" name="alarmTypeValue" ng-model="vm.alarm.alarmTypeValue" id="field_alarmTypeValue">
+                <option value="CALL" data-translate="safeworkingApp.AlarmType.CALL">CALL</option>
+                <option value="WATCH_PHONE" data-translate="safeworkingApp.AlarmType.WATCH_PHONE">WATCH_PHONE</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label class="control-label" data-translate="safeworkingApp.alarm.falseAlarm" for="field_falseAlarm">False Alarm</label>
                 <input type="checkbox" name="falseAlarm" id="field_falseAlarm"
                           ng-model="vm.alarm.falseAlarm"/>

@@ -35,6 +35,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.masterteknoloji.net.domain.enumeration.AlarmType;
 /**
  * Test class for the AlarmResource REST controller.
  *
@@ -62,6 +63,9 @@ public class AlarmResourceIntTest {
 
     private static final String DEFAULT_ALARM_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_ALARM_TYPE = "BBBBBBBBBB";
+
+    private static final AlarmType DEFAULT_ALARM_TYPE_VALUE = AlarmType.CALL;
+    private static final AlarmType UPDATED_ALARM_TYPE_VALUE = AlarmType.WATCH_PHONE;
 
     private static final Boolean DEFAULT_FALSE_ALARM = false;
     private static final Boolean UPDATED_FALSE_ALARM = true;
@@ -117,6 +121,7 @@ public class AlarmResourceIntTest {
             .backGroundImageContentType(DEFAULT_BACK_GROUND_IMAGE_CONTENT_TYPE)
             .imageFile(DEFAULT_IMAGE_FILE)
             .alarmType(DEFAULT_ALARM_TYPE)
+            .alarmTypeValue(DEFAULT_ALARM_TYPE_VALUE)
             .falseAlarm(DEFAULT_FALSE_ALARM)
             .processed(DEFAULT_PROCESSED)
             .note(DEFAULT_NOTE);
@@ -150,6 +155,7 @@ public class AlarmResourceIntTest {
         assertThat(testAlarm.getBackGroundImageContentType()).isEqualTo(DEFAULT_BACK_GROUND_IMAGE_CONTENT_TYPE);
         assertThat(testAlarm.getImageFile()).isEqualTo(DEFAULT_IMAGE_FILE);
         assertThat(testAlarm.getAlarmType()).isEqualTo(DEFAULT_ALARM_TYPE);
+        assertThat(testAlarm.getAlarmTypeValue()).isEqualTo(DEFAULT_ALARM_TYPE_VALUE);
         assertThat(testAlarm.isFalseAlarm()).isEqualTo(DEFAULT_FALSE_ALARM);
         assertThat(testAlarm.isProcessed()).isEqualTo(DEFAULT_PROCESSED);
         assertThat(testAlarm.getNote()).isEqualTo(DEFAULT_NOTE);
@@ -192,6 +198,7 @@ public class AlarmResourceIntTest {
             .andExpect(jsonPath("$.[*].backGroundImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_BACK_GROUND_IMAGE))))
             .andExpect(jsonPath("$.[*].imageFile").value(hasItem(DEFAULT_IMAGE_FILE.toString())))
             .andExpect(jsonPath("$.[*].alarmType").value(hasItem(DEFAULT_ALARM_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].alarmTypeValue").value(hasItem(DEFAULT_ALARM_TYPE_VALUE.toString())))
             .andExpect(jsonPath("$.[*].falseAlarm").value(hasItem(DEFAULT_FALSE_ALARM.booleanValue())))
             .andExpect(jsonPath("$.[*].processed").value(hasItem(DEFAULT_PROCESSED.booleanValue())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
@@ -215,6 +222,7 @@ public class AlarmResourceIntTest {
             .andExpect(jsonPath("$.backGroundImage").value(Base64Utils.encodeToString(DEFAULT_BACK_GROUND_IMAGE)))
             .andExpect(jsonPath("$.imageFile").value(DEFAULT_IMAGE_FILE.toString()))
             .andExpect(jsonPath("$.alarmType").value(DEFAULT_ALARM_TYPE.toString()))
+            .andExpect(jsonPath("$.alarmTypeValue").value(DEFAULT_ALARM_TYPE_VALUE.toString()))
             .andExpect(jsonPath("$.falseAlarm").value(DEFAULT_FALSE_ALARM.booleanValue()))
             .andExpect(jsonPath("$.processed").value(DEFAULT_PROCESSED.booleanValue()))
             .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.toString()));
@@ -247,6 +255,7 @@ public class AlarmResourceIntTest {
             .backGroundImageContentType(UPDATED_BACK_GROUND_IMAGE_CONTENT_TYPE)
             .imageFile(UPDATED_IMAGE_FILE)
             .alarmType(UPDATED_ALARM_TYPE)
+            .alarmTypeValue(UPDATED_ALARM_TYPE_VALUE)
             .falseAlarm(UPDATED_FALSE_ALARM)
             .processed(UPDATED_PROCESSED)
             .note(UPDATED_NOTE);
@@ -267,6 +276,7 @@ public class AlarmResourceIntTest {
         assertThat(testAlarm.getBackGroundImageContentType()).isEqualTo(UPDATED_BACK_GROUND_IMAGE_CONTENT_TYPE);
         assertThat(testAlarm.getImageFile()).isEqualTo(UPDATED_IMAGE_FILE);
         assertThat(testAlarm.getAlarmType()).isEqualTo(UPDATED_ALARM_TYPE);
+        assertThat(testAlarm.getAlarmTypeValue()).isEqualTo(UPDATED_ALARM_TYPE_VALUE);
         assertThat(testAlarm.isFalseAlarm()).isEqualTo(UPDATED_FALSE_ALARM);
         assertThat(testAlarm.isProcessed()).isEqualTo(UPDATED_PROCESSED);
         assertThat(testAlarm.getNote()).isEqualTo(UPDATED_NOTE);

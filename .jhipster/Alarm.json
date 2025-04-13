@@ -44,6 +44,11 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "alarmTypeValue",
+            "fieldType": "AlarmType",
+            "fieldValues": "CALL,WATCH_PHONE"
+        },
+        {
             "fieldName": "falseAlarm",
             "fieldType": "Boolean"
         },

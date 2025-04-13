@@ -1,11 +1,12 @@
 {
     "home": {
-        "title": "Merhaba, Java Hipster!",
-        "subtitle": "Burası Ana Sayfanız",
+        "title": "SafeWorking'e Hoş Geldiniz.",
+        "subtitle": "Yeni Nesil İş Güvenliği Sistemi",
+        "subtitle2": "Artık Çalışma Ortamlarımız Daha Güvenli",
         "logged": {
             "message": "\"{{username}}\" olarak giriş yaptınız."
         },
-        "question": "JHipster hakkında sorularınız için:",
+        "question": "SafeWorking hakkında sorularınız için:",
         "link": {
             "homepage": "JHipster ana sayfa",
             "stackoverflow": "Stack Overflow'da JHipster",
@@ -14,6 +15,13 @@
             "follow": "Twitter'da @java_hipster adresinden ulaşabilirsiniz"
         },
         "like": "JHipster'ı beğendiysenizi yıldız vermeyi unutmayın",
-        "github": "GitHub"
+        "github": "GitHub",
+        
+               
+        "subDescTitle":"SafeWorking ile Artık Çalışma Alanlarımız Daha Güvenli",
+        "subDescItem1":"-Kamera Görüntü Analizi",
+        "subDescItem2":"-Gerçek Zamanlı Tespit",
+        "subDescItem3":"-Gelişmiş Yapay Zeka Tenolojisi",
+        "subDescItem4":"-Gelişmiş Entegrasyon Seçenekleri"   
     }
 }

@@ -37,6 +37,9 @@ public class Camera implements Serializable {
     @Column(name = "channel")
     private Long channel;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne
     private Device device;
 
@@ -114,6 +117,19 @@ public class Camera implements Serializable {
         this.channel = channel;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public Camera description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Device getDevice() {
         return device;
     }
@@ -157,6 +173,7 @@ public class Camera implements Serializable {
             ", password='" + getPassword() + "'" +
             ", rtspUrl='" + getRtspUrl() + "'" +
             ", channel=" + getChannel() +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

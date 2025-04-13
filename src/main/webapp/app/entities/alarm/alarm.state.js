@@ -46,6 +46,7 @@
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('alarm');
+                    $translatePartialLoader.addPart('alarmType');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
@@ -68,6 +69,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('alarm');
+                    $translatePartialLoader.addPart('alarmType');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Alarm', function($stateParams, Alarm) {
@@ -131,6 +133,7 @@
                                 backGroundImageContentType: null,
                                 imageFile: null,
                                 alarmType: null,
+                                alarmTypeValue: null,
                                 falseAlarm: null,
                                 processed: null,
                                 note: null,

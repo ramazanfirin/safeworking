@@ -53,6 +53,9 @@ public class CameraResourceIntTest {
     private static final Long DEFAULT_CHANNEL = 1L;
     private static final Long UPDATED_CHANNEL = 2L;
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
     @Autowired
     private CameraRepository cameraRepository;
 
@@ -95,7 +98,8 @@ public class CameraResourceIntTest {
             .username(DEFAULT_USERNAME)
             .password(DEFAULT_PASSWORD)
             .rtspUrl(DEFAULT_RTSP_URL)
-            .channel(DEFAULT_CHANNEL);
+            .channel(DEFAULT_CHANNEL)
+            .description(DEFAULT_DESCRIPTION);
         return camera;
     }
 
@@ -124,6 +128,7 @@ public class CameraResourceIntTest {
         assertThat(testCamera.getPassword()).isEqualTo(DEFAULT_PASSWORD);
         assertThat(testCamera.getRtspUrl()).isEqualTo(DEFAULT_RTSP_URL);
         assertThat(testCamera.getChannel()).isEqualTo(DEFAULT_CHANNEL);
+        assertThat(testCamera.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
     @Test
@@ -160,7 +165,8 @@ public class CameraResourceIntTest {
             .andExpect(jsonPath("$.[*].username").value(hasItem(DEFAULT_USERNAME.toString())))
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())))
             .andExpect(jsonPath("$.[*].rtspUrl").value(hasItem(DEFAULT_RTSP_URL.toString())))
-            .andExpect(jsonPath("$.[*].channel").value(hasItem(DEFAULT_CHANNEL.intValue())));
+            .andExpect(jsonPath("$.[*].channel").value(hasItem(DEFAULT_CHANNEL.intValue())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
     @Test
@@ -178,7 +184,8 @@ public class CameraResourceIntTest {
             .andExpect(jsonPath("$.username").value(DEFAULT_USERNAME.toString()))
             .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD.toString()))
             .andExpect(jsonPath("$.rtspUrl").value(DEFAULT_RTSP_URL.toString()))
-            .andExpect(jsonPath("$.channel").value(DEFAULT_CHANNEL.intValue()));
+            .andExpect(jsonPath("$.channel").value(DEFAULT_CHANNEL.intValue()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
     @Test
@@ -205,7 +212,8 @@ public class CameraResourceIntTest {
             .username(UPDATED_USERNAME)
             .password(UPDATED_PASSWORD)
             .rtspUrl(UPDATED_RTSP_URL)
-            .channel(UPDATED_CHANNEL);
+            .channel(UPDATED_CHANNEL)
+            .description(UPDATED_DESCRIPTION);
 
         restCameraMockMvc.perform(put("/api/cameras")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -221,6 +229,7 @@ public class CameraResourceIntTest {
         assertThat(testCamera.getPassword()).isEqualTo(UPDATED_PASSWORD);
         assertThat(testCamera.getRtspUrl()).isEqualTo(UPDATED_RTSP_URL);
         assertThat(testCamera.getChannel()).isEqualTo(UPDATED_CHANNEL);
+        assertThat(testCamera.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test

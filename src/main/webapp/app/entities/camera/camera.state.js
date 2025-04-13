@@ -109,6 +109,7 @@
                                 password: null,
                                 rtspUrl: null,
                                 channel: null,
+                                description: null,
                                 id: null
                             };
                         }

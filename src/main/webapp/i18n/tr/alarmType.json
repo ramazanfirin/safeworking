@@ -1,0 +1,9 @@
+{
+    "safeworkingApp": {
+        "AlarmType" : {
+            "null": "",
+            "CALL": "TELEFON_KONUSMA",
+            "WATCH_PHONE": "TELEFON_IZLEME"
+        }
+    }
+}
